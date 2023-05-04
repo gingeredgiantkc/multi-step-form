@@ -3,7 +3,7 @@ import React from "react";
 const ThirdForm = ({ onChange, formValues }) => {
   return (
     <div className="w-full max-w-sm">
-      <form className="bg-white shadow-md rounded px-24 pt-16 pb-10 mb-8 rounded-md ">
+      <form className="bg-white shadow-md rounded px-24 pt-16 pb-10 mb-8">
         <div className="grid gap-4 place-content-center items-center">
           <h1 className="text-gray-700 pb-8 font-bold text-2xl">Login Info</h1>
         </div>
