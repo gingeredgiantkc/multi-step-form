@@ -18,6 +18,13 @@
 .env.test.local
 .env.production.local
 
+tailwind.config.js
+postcss.config.js
+tsconfig.json
+tsconfig.node.json
+vite.config.tsconfig
+./src/vite-env.d.ts
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
