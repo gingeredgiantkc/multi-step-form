@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { StepperContext } from './contexts/StepperContext'
-import Stepper from './components/Stepper'
-import StepperControl from './components/StepperControl'
-import FormAgent from "./components/FormComponents/FormAgent";
-import FormCustomer from "./components/FormComponents/FormCustomer";
-import FormData from "./components/FormComponents/FormData";
+import { StepperContext } from '../../contexts/StepperContext'
+import Stepper from '../StepperComponents/Stepper'
+import StepperControl from '../StepperComponents/StepperControl'
+import FormAgent from "./FormAgent";
+import FormCustomer from "./FormCustomer";
+import FormData from "./FormData";
 
 const ParentComponent = () => {
   const steps = [

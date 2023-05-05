@@ -42,6 +42,40 @@ J              id="fn"
               placeholder="Last Name"
             ></input>
           </div>
+          <div className="mb-4 col-start-1 col-end-2">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="fn"
+            >
+              Email Address
+            </label>
+            <input
+              className="shadow appearance-none rounded bg-slate-100 border-b-gray-400 w-full py-2 px-3 border-2 border-gray-100 hover:border-b-gray-600"
+J              id="email"
+              name="email"
+              type="email"
+              placeholder="Email Address"
+              onChange={onChange}
+              value={formValues.fn}
+            ></input>
+          </div>
+          <div className="mb-4 col-start- col-end-2">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="crisId"
+            >
+              CRIS ID
+            </label>
+            <input
+              className="shadow appearance-none rounded bg-slate-100 border-b-gray-400 w-full py-2 px-3 border-2 border-gray-100 hover:border-b-gray-600"
+J              id="crisId"
+              name="crisId"
+              type="text"
+              placeholder="CRIS ID"
+              onChange={onChange}
+              value={formValues.fn}
+            ></input>
+          </div>
         </div>
         <div className="flex items-center justify-between" />
       </form>

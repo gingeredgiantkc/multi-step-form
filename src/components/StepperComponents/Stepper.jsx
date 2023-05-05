@@ -74,7 +74,7 @@ const Stepper = ({steps, currentStep}) => {
           <div className={`rounded-full transition duration-500 ease-in-out border-2
           border-gray-300 h-12 w-12 flex items-center justify-center py-3 ${
             step.selected
-              ? "bg-green-600 text-white font-bold border border-green-600"
+              ? "bg-torch-red text-white font-bold border border-torch-red"
               : "bg-white text-gray-700" 
             }`}
           >
@@ -97,7 +97,7 @@ const Stepper = ({steps, currentStep}) => {
         </div>  
         <div className={`flex-auto border-t-2 transition duration-500 ease-in-out ${
           step.completed
-          ? "border-green-600"
+          ? "border-torch-red"
           : "border-gray-300"
           }`}
         >

@@ -32,7 +32,7 @@ const StepperControl = ({handleClick, currentStep, steps}) => {
       {currentStep === steps.length ? (
         <div>
           <button
-            className="bg-green-500 text-white uppercase py-2 px-4 rounded-xl font-semibold
+            className="bg-torch-red text-white uppercase py-2 px-4 rounded-xl font-semibold
             cursor-pointer hover:bg-slate-700 hover:text-white transition duration-200 ease-in-out col-end-3"
             onClick={() => handleSubmit()}
           >
@@ -42,8 +42,8 @@ const StepperControl = ({handleClick, currentStep, steps}) => {
       ) : (
         <div>
           <button
-            className="bg-green-500 text-white uppercase py-2 px-4 rounded-xl font-semibold
-            cursor-pointer border-2 border-green-500 hover:border-slate-700 hover:bg-slate-700
+            className="bg-torch-red text-white uppercase py-2 px-4 rounded-xl font-semibold
+            cursor-pointer border-2 border-torch-red hover:border-slate-700 hover:bg-slate-700
             hover:text-white transition duration-200 ease-in-out col-end-3"
             onClick={() => handleClick("next")}
           >

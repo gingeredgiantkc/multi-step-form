@@ -1,9 +1,9 @@
-import ParentComponent from "./ParentComponent";
+import ParentComponent from "./components/FormComponents/ParentComponent";
 import './App.css'
 
 function App() {
   return (
-    <div className="bg-[beige] grid grid-cols-5">
+    <div className="bg-midnight-express grid grid-cols-5">
       <ParentComponent />
     </div>
   );
