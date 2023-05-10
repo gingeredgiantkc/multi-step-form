@@ -1,120 +1,126 @@
-import React, { useState } from "react";
-import { StepperContext } from '../../contexts/StepperContext'
-import Stepper from '../StepperComponents/Stepper'
-import StepperControl from '../StepperComponents/StepperControl'
-import FormAgent from "./FormAgent";
-import FormCustomer from "./FormCustomer";
-import FormData from "./FormData";
+import { Box, Card, CardContent } from '@mui/material';
+import React, { useState } from 'react';
+import { PageContext } from '../../contexts/PageContext';
+import Navigation from "./Navigation";
+import Stepper from "./Stepper";
+import Agent from './Agent';
+import Customer from './Customer';
+import Data from "./Data";
 
-const ParentComponent = () => {
-  const steps = [
+export default function ParentComponent() {
+  const initialValues = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    crisId: '',
+    csr: '',
+    btn: '',
+    order: '',
+    data: '',
+    voice: '',
+    video: '',
+  };
+
+  const [values, setValues] = useState(initialValues);
+  const [finalValues, setFinalValues] = useState([]);
+  const [currentStep, setCurrentStep] = useState(1);
+
+  const stepArray = [
     "Agent",
+    // "Location",
+    // "Service Offered",
     "Customer",
-    "Data",
+    "Data"
   ];
 
-  const [currentStep, setCurrentStep] = useState(1);
-  const [userData, setUserData] = useState('');
-  const [finalData, setFinalData] = useState([]);
-
-  const initialValues = {
-    fn: "",
-    ln: "",
-    email: "",
-    crisId: "",
-    csr: "",
-    btn: "",
-    order: "",
-    data: "",
-    voice: "",
-    video: "",
+  const onChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setValues({ ...values, [name]: type === "radio" ? checked : value });
   };
-  const [values, setValues] = useState(initialValues);
 
+  const steps = stepArray;
   const displayStep = (step) => {
     switch (step) {
       case 1: {
         return (
-          <div>
-            <FormAgent
-              formValues={values}
-              onChange={onChange}
-            ></FormAgent>
-          </div>
+          <Agent formValues={values} onChange={onChange} />
         );
       }
       case 2: {
         return (
-          <FormCustomer
-            formValues={values}
-            onChange={onChange}
-          ></FormCustomer>
+          <Customer formValues={values} onChange={onChange} />
         );
       }
       case 3: {
         return (
-          <FormData
-            formValues={values}
-            onChange={onChange}
-          ></FormData>
+          <Data formValues={values} onChange={onChange} />
         );
       }
-      default:
-        return null;
+      default: return null;
     }
   };
-/*
-  const states = [
-    { id: "0", name: "Paris" },
-    { id: "1", name: "London" },
-    { id: "2", name: "Berlin" },
-    { id: "3", name: "Warsaw" },
-  ];
-*/
-
-  const onChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setValues({ ...values, [name]: type === "checkbox" ? checked : value });
+  
+  const handleClick = (clickType) => {
+    let newStep = currentStep;
+    (clickType == "next") ? newStep++ : newStep--;
+    // Check if steps are within the boundary
+    if (newStep > 0 && newStep <= steps.length) {
+      setCurrentStep(newStep)
+    }
   };
 
-  const handleClick = (direction) => {
-    let newStep = currentStep;
-
-    direction === "next" ? newStep++ : newStep--;
-    newStep > 0 && newStep <= steps.length && setCurrentStep(newStep);
-  }
-
   return (
-    <React.Fragment>
-      <div id="form-base" className="col-start-2 col-span-3">
-        <div className="items-center content-center self-center">
+    <Card sx={{
+      m: 0,
+      mx: 'auto',
+      width: "50%",
+    }}>
+      <CardContent>
+        <Box paddingBottom={2}>
           <Stepper
             steps={steps}
             currentStep={currentStep}
           />
-        </div>
-        { /* Display Components */ }
-        <div className="">
-          <StepperContext.Provider value={{
-            userData,
-            setUserData,
-            finalData,
-            setFinalData
+        </Box>
+        <Box paddingBottom={2}>
+{/**      <MultiStepForm
+            initialValues={{
+              firstName: '',
+              lastName: '',
+              email: '',
+              crisId: '',
+              csr: '',
+              btn: '',
+              order: '',
+              data: '',
+              voice: '',
+              video: '',
+            }}
+            onSubmit={(values) => {
+              alert(JSON.stringify(values,null,2));
+            }}
+          >
+          <FormStep onSubmit={() => console.log('Step1 subnmit')}>      */}
+          <PageContext.Provider value={{
+            values,
+            setValues,
+            finalValues,
+            setFinalValues,
+            onChange
           }}>
-            {displayStep(currentStep)}
-          </StepperContext.Provider>
-        </div>
-        {/* Navigation Controls */ }
-        <div className="row-start-1 z-auto">
-          <StepperControl 
+              {displayStep(currentStep)}
+            {/**</FormStep>
+          </MultiStepForm> */}
+          </PageContext.Provider>
+        </Box>
+        <Box paddingBottom={2}>
+          <Navigation
             handleClick={handleClick}
-            currentStep={currentStep}
             steps={steps}
+            currentStep={currentStep}
           />
-        </div>
-      </div>
-    </React.Fragment>
+        </Box>
+      </CardContent>
+    </Card>
   );
-};
-
-export default ParentComponent;
+}
