@@ -27,8 +27,6 @@ export default function ParentComponent() {
 
   const stepArray = [
     "Agent",
-    // "Location",
-    // "Service Offered",
     "Customer",
     "Data"
   ];
@@ -83,34 +81,13 @@ export default function ParentComponent() {
           />
         </Box>
         <Box paddingBottom={2}>
-{/**      <MultiStepForm
-            initialValues={{
-              firstName: '',
-              lastName: '',
-              email: '',
-              crisId: '',
-              csr: '',
-              btn: '',
-              order: '',
-              data: '',
-              voice: '',
-              video: '',
-            }}
-            onSubmit={(values) => {
-              alert(JSON.stringify(values,null,2));
-            }}
-          >
-          <FormStep onSubmit={() => console.log('Step1 subnmit')}>      */}
           <PageContext.Provider value={{
             values,
             setValues,
             finalValues,
-            setFinalValues,
-            onChange
+            setFinalValues
           }}>
-              {displayStep(currentStep)}
-            {/**</FormStep>
-          </MultiStepForm> */}
+            {displayStep(currentStep)}
           </PageContext.Provider>
         </Box>
         <Box paddingBottom={2}>

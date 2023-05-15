@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 
-const StepperNew = ({ steps, currentStep }) => {
+const Stepper = ({ steps, currentStep }) => {
 	const [stepperSteps, setStep] = useState([]);
 	const stepsStateRef = useRef();
 
@@ -110,5 +110,5 @@ const StepperNew = ({ steps, currentStep }) => {
 	)
 }
 
-export default StepperNew
+export default Stepper;
 //Stepper.js

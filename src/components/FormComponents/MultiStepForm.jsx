@@ -1,6 +1,9 @@
 import React, { useState} from 'react';
 import { Form, Formik } from 'formik';
-
+import Navigation from './Navigation';
+import Agent from './Agent';
+import Customer from './Customer';
+import Data from './Data';
 
 const MultiStepForm = ({ children, initialValues, onSubmit }) => {
   const [stepNumber, setStepNumber] = useState(1);
@@ -13,22 +16,22 @@ const MultiStepForm = ({ children, initialValues, onSubmit }) => {
 
   const next = values => {
     setSnapshot(values);
-    setStepNumber(Math.min(stepNumber + 1, totalSteps));
+    setStepNumber(stepNumber + 1);
   };
 
   const previous = values => {
     setSnapshot(values);
-    setStepNumber(Math.max(stepNumber - 1, 1));
+    setStepNumber(stepNumber - 1);
   };
 
-  const handleSubmit = async (values, actions) => {
+  const handleSubmit = async (values, helpers) => {
     if (step.props.onSubmit) {
-      await step.props.onSubmit(values, actions);
+      await step.props.onSubmit(values, helpers);
     }
     if (isLastStep) {
-      return onSubmit(values, actions);
+      return onSubmit(values, helpers);
     } else {
-      actions.setTouched({});
+      helpers.setTouched({});
       next(values);
     }
   };
@@ -39,9 +42,14 @@ const MultiStepForm = ({ children, initialValues, onSubmit }) => {
       onSubmit={handleSubmit}
       validationSchema={step.props.validationSchema}
     >
-      {formik => (
+      {(formik) => (
         <Form>
-          {step}
+          {displayStep(stepNumber)}
+          <Navigation
+            isLastStep={isLastStep}
+            hasPrevious={stepNumber > 1}
+            onBackClick={() => previous(formik.values)}
+          />
         </Form>
       )}
     </Formik>
@@ -50,4 +58,4 @@ const MultiStepForm = ({ children, initialValues, onSubmit }) => {
 
 export default MultiStepForm;
 
-export const FormStep = ({ children }) => children;
+export const FormStep = ({stepName = '', children }) => children;

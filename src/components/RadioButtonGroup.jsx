@@ -1,93 +1,101 @@
-import React, { Component } from "react";
+import React from "react";
 
-class RadioButtonGroup extends Component {
-  constructor() {
-    super();
-    this.state = {
-      name: "React"
-    };
-    this.onValueChange = this.onValueChange.bind(this);
-  }
-
-  onValueChange(event) {
-    this.setState({
-      selectedOption: event.target.value
-    });
-  }
-
-  render() {
-    return (
-      <div className="mx-auto grid grid-cols-6">
-        <div className="radio">
-          <label>
-            <input
-              className="col-end-1"
-              type="radio"
-              value="PI"
-              checked={this.state.selectedOption === "PI"}
-              onChange={this.onValueChange}
-            />
+export default function RadioButtonGroup() {
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="form-check form-check-inline">
+          <input
+            className="form-check-input"
+            name="order"
+            type="radio"
+            id="PI"
+            value="PI"
+          />
+          <label
+            className="form-check-label"
+            for="PI"
+          >
             PI
           </label>
         </div>
-        <div className="radio">
-          <label>
-            <input
-              type="radio"
-              value="RI"
-              checked={this.state.selectedOption === "RI"}
-              onChange={this.onValueChange}
-            />
+        <div className="form-check form-check-inline">
+          <input
+            className="form-check-input"
+            name="order"
+            type="radio"
+            id="RI"
+            value="RI"
+          />
+          <label
+            className="form-check-label"      
+            for="RI"
+          >
             RI
           </label>
         </div>
-        <div className="radio">
-          <label>
-            <input
-              type="radio"
-              value="RC"
-              checked={this.state.selectedOption === "RC"}
-              onChange={this.onValueChange}
-            />
+        <div className="form-check form-check-inline">
+          <input
+            className="form-check-input"
+            name="order"
+            type="radio"
+            id="RC"
+            value="RC"
+          />
+          <label
+            className="form-check-label"
+            for="RC"
+          >
             RC
           </label>
-        </div>
-        <div className="radio">
-          <label>
-            <input
-              type="radio"
-              value="RO"
-              checked={this.state.selectedOption === "RO"}
-              onChange={this.onValueChange}
-            />
+        </div>    
+      </div>
+      <div className="row">
+        <div className="form-check form-check-inline">
+          <input
+            className="form-check-input"
+            name="order"
+            type="radio"
+            id="RO"
+            value="RO"
+          />
+          <label
+            className="form-check-label"
+            for="RO"
+          >
             RO
           </label>
         </div>
-        <div className="radio">
-          <label>
-            <input
-              type="radio"
-              value="CC"
-              checked={this.state.selectedOption === "CC"}
-              onChange={this.onValueChange}
-            />
+        <div className="form-check form-check-inline">
+          <input
+            className="form-check-input"
+            name="order"
+            type="radio"
+            id="CC"
+            value="CC"
+          />
+          <label
+            for="CC"
+          >
             CC
           </label>
         </div>
-        <div className="radio">
-          <label>
-            <input
-              type="radio"
-              value="CD"
-              checked={this.state.selectedOption === "CD"}
-              onChange={this.onValueChange}
-            />
+        <div className="form-check form-check-inline">
+          <input
+            className="form-check-input"
+            name="order"
+            type="radio"
+            id="CD"
+            value="CD"
+          />
+          <label
+            className="form-check-label"
+            for="CD"
+          >
             CD
           </label>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
-
-export default RadioButtonGroup;
