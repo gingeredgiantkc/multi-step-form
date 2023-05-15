@@ -1,4 +1,5 @@
 import React from "react";
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { useFormik } from "formik";
 import { basicSchema } from "../../schema/BasicSchema";
 
@@ -40,7 +41,9 @@ export default function Agent() {
             value={values.firstName}
           />
             { errors.firstName && touched.firstName
-              ? <span className="text-[10px] text-torch-red">{errors.firstName}</span>
+              ? <span className="text-[10px] text-torch-red">
+                  <ErrorOutlineIcon fontSize="small" color="error" /> {errors.firstName}
+                </span>
               : <span /> }
         </div>
         <div className="col">
@@ -63,7 +66,11 @@ export default function Agent() {
             type="text"
             placeholder="Last Name"
           />
-          { errors.lastName && touched.lastName ? <div className="text-[10px] text-torch-red">{errors.lastName}</div> : <div /> }
+          { errors.lastName && touched.lastName 
+            ? <span className="text-[10px] text-torch-red">
+              <ErrorOutlineIcon fontSize="small" color="error" /> {errors.lastName}
+              </span>
+            : <span /> }
         </div>
       </div>
       <div className="row row-cols-2">
