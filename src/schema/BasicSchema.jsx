@@ -7,11 +7,11 @@ export const basicSchema = Yup.object().shape({
   firstName: Yup
     .string('Enter your first name')
     .min(2, 'Must contain 2 characters')
-    .required('First name is required'),
+    .required('Required'),
   lastName: Yup
     .string('Enter your last name')
     .min(2, 'Must contain 2 characaters')
-    .required('Last name is required'),
+    .required('Required'),
   email: Yup
     .string('Enter your email')
     .email('Enter a valid email')
