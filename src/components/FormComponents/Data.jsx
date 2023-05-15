@@ -11,10 +11,10 @@ const Data = () => {
   });
 
   return (
-    <div className="mx-auto grid w-4/5 grid-flow-row">
-      <div className="bg-white shadow-xl drop-shadow-xl col-span-3 h-[550px] px-12 pt-16 pb-2 mt-8 mb-0 rounded-md">
-        <div className="gap-4 place-content-center mx-auto items-center z-0">
-          <h1 className="text-gray-700 pb-8 font-bold text-2xl col-start-3 items-center">Data</h1>
+    <div className="container">
+      <div className="row">
+        <div className="col-4 offset-md-4 text-center">
+          <h1 className="text-gray-700 pb-8 font-bold text-2xl">Data</h1>
         </div>
         <div className="grid grid-col-3 gap-4">
           <div className="mb-4 col-start-1 col-end-2">

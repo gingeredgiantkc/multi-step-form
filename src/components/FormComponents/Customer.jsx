@@ -1,6 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import { basicSchema } from "../../schema/BasicSchema";
+import { SpaRounded } from "@mui/icons-material";
 
 const Customer = () => {
   const { values, errors, touched, handleBlur, handleChange } = useFormik({
@@ -36,7 +37,11 @@ const Customer = () => {
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          { errors.csr && touched.csr ? <div className="text-[10px] text-torch-red">{errors.csr}</div> : <div /> }
+          { errors.csr && touched.csr
+            ? <span className="text-[12px] text-torch-red">
+            <ErrorOutlineIcon fontSize="small" color="error" /> {errors.csr}
+            </span>
+						: <span /> }
         </div>
         <div className="col">
           <label
@@ -52,9 +57,14 @@ const Customer = () => {
             type="text"
             placeholder="BTN"
             value={values.btn}
+            onBlur={handleBlur}
             onChange={handleChange}
           />
-          { errors.btn && touched.btn ? <div className="text-[10px] text-torch-red">{errors.btn}</div> : <div /> }
+          { errors.btn && touched.btn
+           	? <span className="text-[12px] text-torch-red">
+              <ErrorOutlineIcon fontSize="small" color="error" /> {errors.btn}
+              </span>
+						: <span /> }
         </div>
       </div>
       <div className="row row-col-2 mb-4">
@@ -89,71 +99,81 @@ const Customer = () => {
               RI
             </label>
           </div>
-          <div className="col" />
-          <div className="col">
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                name="order"
-                type="radio"
-                id="RC"
-                value="RC"
-              />
-              <label
-                className="form-check-label"
-                for="RC"
-              >
-                RC
-              </label>
-            </div>    
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                name="order"
-                type="radio"
-                id="RO"
-                value="RO"
-              />
-              <label
-                className="form-check-label"
-                for="RO"
-              >
-                RO
-              </label>
-            </div>
+          <div className="form-check form-check-inline">
+            <input
+              className="form-check-input"
+              name="order"
+              type="radio"
+              id="RC"
+              value="RC"
+            />
+            <label
+              className="form-check-label"
+              for="RC"
+            >
+              RC
+            </label>
+          </div>    
+          <div className="form-check form-check-inline">
+            <input
+              className="form-check-input"
+              name="order"
+              type="radio"
+              id="RO"
+              value="RO"
+            />
+            <label
+              className="form-check-label"
+              for="RO"
+            >
+              RO
+            </label>
           </div>
-          <div className="col" />
-          <div className="col">
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                name="order"
-                type="radio"
-                id="CC"
-                value="CC"
-              />
-              <label
-                for="CC"
-              >
-                CC
-              </label>
-            </div>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                name="order"
-                type="radio"
-                id="CD"
-                value="CD"
-              />
-              <label
-                className="form-check-label"
-                for="CD"
-              >
-                CD
-              </label>
-            </div>
+          <div className="form-check form-check-inline">
+            <input
+              className="form-check-input"
+              name="order"
+              type="radio"
+              id="CC"
+              value="CC"
+            />
+            <label
+              for="CC"
+            >
+              CC
+            </label>
           </div>
+          <div className="form-check form-check-inline">
+            <input
+              className="form-check-input"
+              name="order"
+              type="radio"
+              id="CD"
+              value="CD"
+            />
+            <label
+              className="form-check-label"
+              for="CD"
+            >
+              CD
+            </label>
+          </div>
+        </div>
+        <div className="col">
+        <div className="form-check form-switch">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="flexSwitchCheckChecked"
+            checked
+          />
+          <label
+            className="form-check-label"
+            for="flexSwitchCheckChecked"
+          >
+            Checked switch checkbox input
+          </label>
         </div>
         <div className="flex items-center justify-between" />
       </div>

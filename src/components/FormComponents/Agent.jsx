@@ -41,8 +41,8 @@ export default function Agent() {
             value={values.firstName}
           />
             { errors.firstName && touched.firstName
-              ? <span className="text-[10px] text-torch-red">
-                  <ErrorOutlineIcon fontSize="small" color="error" /> {errors.firstName}
+              ? <span className="text-[12px] text-torch-red">
+                <ErrorOutlineIcon fontSize="small" color="error" /> {errors.firstName}
                 </span>
               : <span /> }
         </div>
@@ -67,7 +67,7 @@ export default function Agent() {
             placeholder="Last Name"
           />
           { errors.lastName && touched.lastName 
-            ? <span className="text-[10px] text-torch-red">
+            ? <span className="text-[12px] text-torch-red">
               <ErrorOutlineIcon fontSize="small" color="error" /> {errors.lastName}
               </span>
             : <span /> }
@@ -94,8 +94,12 @@ export default function Agent() {
             onBlur={handleBlur}
             value={values.email}
           />
-          { errors.email && touched.email ? <div className="text-[10px] text-torch-red">{errors.email}</div> : <div /> }  
-        </div>
+          { errors.email && touched.email
+            ? <span className="text-[12px] text-torch-red">
+            	<ErrorOutlineIcon fontSize="small" color="error" /> {errors.email}
+              </span>
+         		: <span /> }
+      </div>
       </div>
       <div className="row">
         <div className="mb-4 col-6">
@@ -118,7 +122,11 @@ export default function Agent() {
             onBlur={handleBlur}
             value={values.crisId}
           />
-            { errors.crisId && touched.crisId ? <div className="text-[10px] text-torch-red">{errors.crisId}</div> : <div /> }
+            { errors.crisId && touched.crisId
+            	? <span className="text-[12px] text-torch-red">
+              	<ErrorOutlineIcon fontSize="small" color="error" /> {errors.crisId}
+                </span>
+              : <span /> }
         </div>
       </div>
     </div>
