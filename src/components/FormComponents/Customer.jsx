@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import { basicSchema } from "../../schema/BasicSchema";
-import { SpaRounded } from "@mui/icons-material";
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
 const Customer = () => {
   const { values, errors, touched, handleBlur, handleChange } = useFormik({
