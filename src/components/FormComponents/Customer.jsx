@@ -1,26 +1,24 @@
 import React from "react";
-import { useFormik } from "formik";
-import { basicSchema } from "../../schema/BasicSchema";
+import {  useFormikContext } from "formik";
+import { validationSchema } from "../../schema/ValidationSchema";
+import Navigation from "./Navigation";
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
-const Customer = ({ onChange }) => {
-  const { values, errors, touched, handleBlur, handleChange } = useFormik({
-    initialValues: {
-      csr: "",
-      btn: "",
-    },
-    validationSchema: basicSchema,
+const Customer = ({ values, handleChange, handleClick, steps, currentStep }) => {
+  const { errors, touched, handleBlur, handleSubmit } = useFormikContext({
+    initialValues: {values},
+    validationSchema: validationSchema,
   });
 
   return (
-    <div className="container w-75">
+    <div className="grid">
       <div className="row">
         <div className="col-4 offset-md-4 text-center">
           <h1 className="text-gray-700 pb-8 font-bold text-2xl">Customer Info</h1>
         </div>
       </div>
-      <div className="row row-cols-2 mb-4">
-        <div className="col">
+      <div className="row flex-justify-around mb-4">
+        <div className="cell-5">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="csr"
@@ -28,7 +26,10 @@ const Customer = ({ onChange }) => {
             Customer Name
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className={`shadow appearance-none rounded bg-slate-200 w-full py-2 px-3 border-2 ${errors.csr && touched.csr
+              ? "border-torch-red"
+              : "border-gray-100 border-b-gray-400 hover:border-b-gray-600"
+            }`}
             id="csr"
             name="csr"
             type="text"
@@ -43,7 +44,7 @@ const Customer = ({ onChange }) => {
             </span>
 						: <span /> }
         </div>
-        <div className="col">
+        <div className="cell-5">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="btn"
@@ -51,7 +52,10 @@ const Customer = ({ onChange }) => {
             BTN
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className={`shadow appearance-none rounded bg-slate-200 w-full py-2 px-3 border-2 ${errors.btn && touched.btn
+              ? "border-torch-red"
+              : "border-gray-100 border-b-gray-400 hover:border-b-gray-600"
+            }`}
             id="btn"
             name="btn"
             type="text"
@@ -162,6 +166,14 @@ const Customer = ({ onChange }) => {
         <div className="col">
         </div>
         <div className="flex items-center justify-between" />
+      </div>
+      <div className="row flex-align-end flex-justify-center">
+        <Navigation
+          handleSubmit={handleSubmit}
+          handleClick={handleClick}
+          steps={steps}
+          currentStep={currentStep}
+        />
       </div>
     </div>
   );

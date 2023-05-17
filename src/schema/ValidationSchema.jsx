@@ -3,7 +3,7 @@ import * as Yup from "yup";
 const crisIdRules = /^[0-9]{6}$/;
 const btnRules = /^[0-9]{10}$/;
 
-export const basicSchema = Yup.object().shape({
+export const validationSchema = Yup.object().shape({
   firstName: Yup
     .string('Enter your first name')
     .min(2, 'Must contain 2 characters')

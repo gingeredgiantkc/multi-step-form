@@ -1,7 +1,6 @@
 import { Box, Card, CardContent } from '@mui/material';
 import React, { useState } from 'react';
-import { PageContext } from '../../contexts/PageContext';
-import Navigation from "./Navigation";
+import { Formik } from 'formik';
 import Stepper from "./Stepper";
 import Agent from './Agent';
 import Customer from './Customer';
@@ -22,7 +21,6 @@ export default function ParentComponent() {
   };
 
   const [values, setValues] = useState(initialValues);
-  const [finalValues, setFinalValues] = useState([]);
   const [currentStep, setCurrentStep] = useState(1);
 
   const stepArray = [
@@ -31,27 +29,40 @@ export default function ParentComponent() {
     "Data"
   ];
 
-  const onChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setValues({ ...values, [name]: type === "radio" ? checked : value });
-  };
-
   const steps = stepArray;
   const displayStep = (step) => {
     switch (step) {
       case 1: {
         return (
-          <Agent formValues={values} onChange={onChange} />
+          <Agent
+            values={values}
+            handleChange={handleChange}
+            handleClick={handleClick}
+            steps={steps}
+            currentStep={currentStep}
+          />
         );
       }
       case 2: {
         return (
-          <Customer formValues={values} onChange={onChange} />
+          <Customer            
+            values={values}
+            handleChange={handleChange}
+            handleClick={handleClick}
+            steps={steps}
+            currentStep={currentStep}
+          />
         );
       }
       case 3: {
         return (
-          <Data formValues={values} onChange={onChange} />
+          <Data
+            values={values}
+            handleChange={handleChange}
+            handleClick={handleClick}
+            steps={steps}
+            currentStep={currentStep}
+          />
         );
       }
       default: return null;
@@ -65,39 +76,33 @@ export default function ParentComponent() {
     if (newStep > 0 && newStep <= steps.length) {
       setCurrentStep(newStep)
     }
+    console.log("values", values)
+  };
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setValues({ ...values, [name]: type === "checkbox" ? checked : value });
   };
 
   return (
-    <Card sx={{
-      m: 0,
-      mx: 'auto',
-      width: "50%",
-    }}>
-      <CardContent>
-        <Box paddingBottom={2}>
-          <Stepper
-            steps={steps}
-            currentStep={currentStep}
-          />
-        </Box>
-        <Box paddingBottom={2}>
-          <PageContext.Provider value={{
-            values,
-            setValues,
-            finalValues,
-            setFinalValues
-          }}>
+    <Formik>
+      <Card sx={{
+        m: 0,
+        mx: 'auto',
+        width: "50%",
+      }}>
+        <CardContent>
+          <Box paddingBottom={2}>
+            <Stepper
+              steps={steps}
+              currentStep={currentStep}
+            />
+          </Box>
+          <Box paddingBottom={2}>
             {displayStep(currentStep)}
-          </PageContext.Provider>
-        </Box>
-        <Box paddingBottom={2}>
-          <Navigation
-            handleClick={handleClick}
-            steps={steps}
-            currentStep={currentStep}
-          />
-        </Box>
-      </CardContent>
-    </Card>
+          </Box>
+        </CardContent>
+      </Card>
+    </Formik>
   );
 }

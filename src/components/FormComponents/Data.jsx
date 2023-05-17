@@ -1,13 +1,12 @@
 import React from 'react';
-import { useFormik } from 'formik';
-import { basicSchema } from '../../schema/BasicSchema';
+import Navigation from './Navigation';
+import { useFormikContext } from 'formik';
+import { validationSchema } from '../../schema/ValidationSchema';
 
-const Data = () => {
-  const { values, errors, touched, handleBlur, handleChange } = useFormik({
-    initialValues: {
-      data: "",
-    },
-    validationSchema: basicSchema,
+const Data = ({ values, handleChange, handleClick, steps, currentStep }) => {
+  const { errors, touched, handleBlur, handleSubmit } = useFormikContext({
+    initialValues: {values},
+    validationSchema: validationSchema
   });
 
   return (
@@ -20,7 +19,7 @@ const Data = () => {
         <div className="row">
           <div className="mb-4 col-8 offset-md-2">
             <textarea
-              className={`shadow appearance-none rounded bg-slate-100 w-full py-2 px-3 border-2 ${errors.data && touched.data
+              className={`shadow appearance-none rounded bg-slate-200 w-full py-2 px-3 border-2 ${errors.data && touched.data
               ? "border-torch-red"
               : "border-gray-100 border-b-gray-400 hover:border-b-gray-600"
               }`}
@@ -35,6 +34,14 @@ const Data = () => {
           </div>
         </div>
         <div className="flex items-center justify-between" />
+        <div className="row flex-align-end flex-justify-center">
+          <Navigation
+            handleSubmit={handleSubmit}
+            handleClick={handleClick}
+            steps={steps}
+            currentStep={currentStep}
+          />
+        </div>
       </div>
   {/**  </div> */}
     </>

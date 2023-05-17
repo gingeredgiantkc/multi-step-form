@@ -1,17 +1,13 @@
 import React from "react";
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import { useFormik } from "formik";
-import { basicSchema } from "../../schema/BasicSchema";
+import Navigation from "./Navigation";
+import { useFormikContext } from "formik";
+import { validationSchema } from "../../schema/ValidationSchema";
 
-export default function Agent() {
-  const { values, errors, touched, handleBlur, handleChange } = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      crisId: "",
-    },
-    validationSchema: basicSchema 
+const Agent = ({ values, handleChange, handleClick, steps, currentStep }) => {
+  const { errors, touched, handleBlur, handleSubmit } = useFormikContext({
+    initialValues: {values},
+    validationSchema: validationSchema 
   });
 
   return (
@@ -27,7 +23,7 @@ export default function Agent() {
             First Name
           </label>
           <input
-            className={`shadow appearance-none rounded bg-slate-100 w-full py-2 px-3 border-2 ${
+            className={`shadow appearance-none rounded bg-slate-200 w-full py-2 px-3 border-2 ${
             errors.firstName && touched.firstName
               ? "border-torch-red"
               : "border-gray-100 border-b-gray-400 hover:border-b-gray-600"
@@ -49,12 +45,12 @@ export default function Agent() {
         <div className="cell-5">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="lastName"
+            htmlFor="values.lastName"
           >
             Last Name
           </label>
           <input
-            className={`shadow appearance-none rounded bg-slate-100 w-full py-2 px-3 border-2 ${errors.lastName && touched.lastName
+            className={`shadow appearance-none rounded bg-slate-200 w-full py-2 px-3 border-2 ${errors.lastName && touched.lastName
             ? "border-torch-red focus:border-torch-red"
             : "border-b-gray-400 border-gray-100 hover:border-b-gray-600 focus:border-b-gray-600 focus-within:border-b-gray-600"
             }`}
@@ -82,7 +78,7 @@ export default function Agent() {
             Email Address
           </label>
           <input
-            className={`shadow appearance-none rounded bg-slate-100 w-full py-2 px-3 border-2 ${errors.email && touched.email
+            className={`shadow appearance-none rounded bg-slate-200 w-full py-2 px-3 border-2 ${errors.email && touched.email
               ? "border-torch-red"
               : "border-gray-100 border-b-gray-400 hover:border-b-gray-600"
             }`}
@@ -110,7 +106,7 @@ export default function Agent() {
             CRIS ID
           </label>
           <input
-            className={`shadow appearance-none rounded bg-slate-100 w-full py-2 px-3 border-2 ${errors.crisId && touched.crisId
+            className={`shadow appearance-none rounded bg-slate-200 w-full py-2 px-3 border-2 ${errors.crisId && touched.crisId
               ? "border-torch-red"
               : "border-gray-100 border-b-gray-400 hover:border-b-gray-600"
             }`}
@@ -129,6 +125,15 @@ export default function Agent() {
               : <span /> }
         </div>
       </div>
+      <div className="row flex-align-end flex-justify-center">
+        <Navigation
+          handleSubmit={handleSubmit}
+          handleClick={handleClick}
+          steps={steps}
+          currentStep={currentStep}
+        />
+      </div>
     </div>
   );
 }
+ export default Agent;
