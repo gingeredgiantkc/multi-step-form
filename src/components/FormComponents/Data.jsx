@@ -11,19 +11,14 @@ const Data = () => {
   });
 
   return (
-    <div className="container">
+    <>
+{/**  <div className="container"> */}
       <div className="row">
         <div className="col-4 offset-md-4 text-center">
           <h1 className="text-gray-700 pb-8 font-bold text-2xl">Data</h1>
         </div>
-        <div className="grid grid-col-3 gap-4">
-          <div className="mb-4 col-start-1 col-end-2">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="fn"
-            >
-              Data
-            </label>
+        <div className="row">
+          <div className="mb-4 col-8 offset-md-2">
             <textarea
               className={`shadow appearance-none rounded bg-slate-100 w-full py-2 px-3 border-2 ${errors.data && touched.data
               ? "border-torch-red"
@@ -41,7 +36,8 @@ const Data = () => {
         </div>
         <div className="flex items-center justify-between" />
       </div>
-    </div>
+  {/**  </div> */}
+    </>
   );
 };
 

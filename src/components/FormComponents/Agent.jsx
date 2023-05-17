@@ -15,14 +15,14 @@ export default function Agent() {
   });
 
   return (
-    <div className="container w-75">
+    <div className="grid">
       <div className="row">
-        <div className="col-4 offset-md-4 text-center">
-          <h1 className="text-gray-700 pb-8 font-bold text-2xl">Agent Info</h1>
+        <div className="cell-4 offset-4 text-center">
+          <h1 className="text-gray-700 pb-6 pt-8 font-bold text-2xl">Agent Info</h1>
         </div>
       </div>
-      <div className="row row-cols-2 mb-4">
-        <div className="col">
+      <div className="row flex-justify-around mb-4">
+        <div className="cell-5">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
             First Name
           </label>
@@ -46,7 +46,7 @@ export default function Agent() {
                 </span>
               : <span /> }
         </div>
-        <div className="col">
+        <div className="cell-5">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="lastName"

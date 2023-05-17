@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { basicSchema } from "../../schema/BasicSchema";
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
-const Customer = () => {
+const Customer = ({ onChange }) => {
   const { values, errors, touched, handleBlur, handleChange } = useFormik({
     initialValues: {
       csr: "",
@@ -79,7 +79,7 @@ const Customer = () => {
             />
             <label
               className="form-check-label"
-              for="PI"
+              htmlFor="PI"
             >
               PI
             </label>
@@ -94,7 +94,7 @@ const Customer = () => {
             />
             <label
               className="form-check-label"      
-              for="RI"
+              htmlFor="RI"
             >
               RI
             </label>
@@ -109,7 +109,7 @@ const Customer = () => {
             />
             <label
               className="form-check-label"
-              for="RC"
+              htmlFor="RC"
             >
               RC
             </label>
@@ -124,7 +124,7 @@ const Customer = () => {
             />
             <label
               className="form-check-label"
-              for="RO"
+              htmlFor="RO"
             >
               RO
             </label>
@@ -138,7 +138,7 @@ const Customer = () => {
               value="CC"
             />
             <label
-              for="CC"
+              htmlFor="CC"
             >
               CC
             </label>
@@ -153,28 +153,13 @@ const Customer = () => {
             />
             <label
               className="form-check-label"
-              for="CD"
+              htmlFor="CD"
             >
               CD
             </label>
           </div>
         </div>
         <div className="col">
-          <div className="form-check form-switch">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="flexSwitchCheckChecked"
-              checked
-            />
-            <label
-              className="form-check-label"
-              for="flexSwitchCheckChecked"
-            >
-              Checked switch checkbox input
-            </label>
-          </div>
         </div>
         <div className="flex items-center justify-between" />
       </div>
