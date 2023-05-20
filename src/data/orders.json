@@ -1,0 +1,8 @@
+{
+  "RI": "New Install",
+  "RC": "Physical Change",
+  "RO": "Disconnect",
+  "PI": "Port-In/Winback",
+  "CC": "Switch Change",
+  "CD": "Records Update"
+}
