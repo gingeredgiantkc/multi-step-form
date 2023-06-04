@@ -2,21 +2,24 @@ import React from "react";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { useField, useFormikContext } from "formik";
 
-const TextFieldWrapper = ({
+const TextInput = ({
   name,
   label,
   ...otherProps
 }) => {
 
-  const { handleChange } = useFormikContext(name);
-  const [field, meta] = useField(name)
+  const { setFieldValue } = useFormikContext();
+  const [field, meta] = useField(name);
+  const handleChange = (e) => {
+    const { value } = e.target;
+    setFieldValue(name, value);
+  };
 
-  const configTextField = {
+  const configInputField = {
     ...field,
     ...otherProps,
-    onChange: {handleChange}
+    onChange: handleChange
   }
-
 
   return (
     <>
@@ -26,16 +29,18 @@ const TextFieldWrapper = ({
       >
         {label}
       </label>
-      <input {...configTextField} />
+      <input {...configInputField} />
       { 
         meta && meta.error && meta.touched
-        ? <span className="text-[12px] text-torch-red">
+        ? <div className="text-[12px] text-torch-red">
             <ErrorOutlineIcon fontSize="small" color="error" /> {meta.error}
-          </span>
-        : <span />
+          </div>
+        : <div className="text-[12px]">
+            { }
+          </div>
       }
     </>
   )
 }
 
-export default TextFieldWrapper;
+export default TextInput;

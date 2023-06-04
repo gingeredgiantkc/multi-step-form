@@ -1,6 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
+/.vscode
 /node_modules
 /.pnp
 .pnp.js
@@ -18,11 +19,14 @@
 .env.test.local
 .env.production.local
 
-tailwind.config.js
-postcss.config.js
-tsconfig.json
-tsconfig.node.json
-vite.config.tsconfig
+./.eslintrc.cjs
+./gitignore
+./tailwind.config.js
+./tailwind-default.config.js
+./postcss.config.js
+./tsconfig.json
+./tsconfig.node.json
+./vite.config.ts
 ./src/vite-env.d.ts
 
 npm-debug.log*

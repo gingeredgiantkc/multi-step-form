@@ -1,10 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./*.{html,js,jsx,ts,tsx}",
-    "./src/**/*.{js,jsx,ts,tsx}",
-    "./src/components/**/*.{js,jsx,ts,tsx}",
-    "./src/contexts/**/*.{js,jsx,ts,tsx}",
+    "./src/**/*.{html,js,jsx,ts,tsx}",
+    "./index.html",
   ],
   theme: {
     extend: {
@@ -15,7 +13,5 @@ module.exports = {
       }
     },
   },
-  plugins: [
-    require('@shrutibalasa/tailwind-grid-auto-fit'),
-  ],
+  plugins: [],
 };
