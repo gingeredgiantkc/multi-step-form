@@ -1,18 +1,34 @@
 import React, { useContext } from "react";
 import * as Yup from "yup";
-import { Col, Container, Row } from "react-bootstrap";
 import { Form, Formik } from "formik";
 import FormikControl from "../FormikControl/FormikControl";
 import { FormContext } from "../../App";
+import { Button, Stack, ThemeProvider, createTheme } from "@mui/material";
+import { NavigateBeforeOutlined, NavigateNextOutlined } from "@mui/icons-material";
 
 const Agent = (props) => {
   const { data, next, prev } = props;
-  const { stepNumber, isLastStep } = useContext(FormContext);
+  const { stepNumber } = useContext(FormContext);
   const handleSubmit = (values) => {
     console.log("data", values);
     next(values);
   };
-
+  const theme = createTheme({
+    palette: {
+      primary: {
+        light: '#4ed07e',
+        main: '#22c55e',
+        dark: '#178941',
+        contrastText: '#ffffff',
+      },
+      secondary: {
+        light: '#afb5bf',
+        main: '#9ca3af',
+        dark: '#6d727a',
+        contrastText: '#ffffff'
+      },
+    },
+  });
   return (
     <Formik
       initialValues={data}
@@ -33,78 +49,68 @@ const Agent = (props) => {
       onSubmit={handleSubmit}
     >
       <Form>
-        <Container>
-          <Row>
-            <Col className="text-center">
-              <h1 className="text-gray-700 py-6 font-bold text-2xl">Agent Information</h1>
-            </Col>
-          </Row>
-        </Container>
-        <Container>
-          <Row className="mx-4 my-2">
-            <Col md={6}>
-              <FormikControl
-                control="input"
-                name="firstName"
-                label="First Name"
-                type="text"
-                autoFocus
-              />
-            </Col>
-          </Row>
-          <Row className="mx-4 my-2">
-            <Col md={6}>
-              <FormikControl
-                control="input"
-                name="lastName"
-                label="Last Name"
-                type="text"
-              />
-            </Col>
-          </Row>
-          <Row className="mx-4 my-2">
-            <Col md={6}>
-              <FormikControl
-                control="input"
-                name="email"
-                label="Email"
-                type="email"
-              />
-            </Col>
-          </Row>
-          <Row className="mx-4 my-2">
-            <Col md={3}>
-              <FormikControl
-                control="input"
-                name="crisId"
-                label="CRIS ID"
-                type="text"
-              />
-            </Col>
-          </Row>
-          <Row className="">
-            <Col md={{ span: 1, offset: 4 }} className="justify-center place-content-end">
-              <button
-                disabled={stepNumber <= 1}
-                type="button"
-                onClick={() => prev(values)}
-                className={`bg-gray-400 text-slate-100 uppercase transition duration-200 ease-in-out border-slate-300
-                font-semibold border-2 py-2 px-4 rounded-xl ${stepNumber <= 1 ? "opacity-50 cursor-not-allowed" : "hover:bg-slate-700 hover:text-white cursor-pointer"}`}
-              >
-                Back 
-              </button>
-            </Col>
-            <Col md={{ span: 1, offset: 1 }} className="justify-center place-content-end">
-              <button
-                type="submit"
-                className="bg-green-500 text-slate-100 uppercase transition duration-200 ease-in-out border-slate-300
-                hover:bg-slate-700 hover:text-white font-semibold cursor-pointer border-2 py-2 px-4 rounded-xl"
-              >
-                {isLastStep ? "Done" : "Next"}
-              </button>
-            </Col>
-          </Row>
-        </Container>
+        <div className="grid grid-cols-12 grid-rows-6 gap-2">
+          <div className="col-span-4 col-start-5 text-center">
+            <h1 className="text-gray-700 pt-3 pb-0 font-bold text-2xl">Agent Information</h1>
+          </div>
+          <div className="col-span-5 col-start-2">
+            <FormikControl
+              control="input"
+              name="firstName"
+              label="First Name"
+              type="text"
+              autoFocus
+            />
+          </div>         
+          <div className="row-start-3 col-start-2 col-span-5">
+            <FormikControl
+              control="input"
+              name="lastName"
+              label="Last Name"
+              type="text"
+            />
+          </div>
+          <div className="row-start-4 col-start-2 col-span-5">
+            <FormikControl
+              control="input"
+              name="email"
+              label="Email"
+              type="email"
+            />
+          </div>
+          <div className="row-start-5 col-start-2 col-span-2">
+            <FormikControl
+              control="input"
+              name="crisId"
+              label="CRIS ID"
+              type="text"
+            />
+          </div>
+          <div className="row-start-6 col-span-12 place-self-center">
+            <ThemeProvider theme={theme}>
+              <Stack direction="row" spacing={2}>
+                <Button
+                  color="secondary"
+                  variant="contained"
+                  startIcon={<NavigateBeforeOutlined />}
+                  disabled={stepNumber <= 1}
+                  type="button"
+                  onClick={() => prev(values)}
+                >
+                  Back
+                </Button>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  endIcon={<NavigateNextOutlined />}
+                  type="submit"
+                >
+                  Next
+                </Button>
+              </Stack>
+            </ThemeProvider>
+          </div>
+        </div>
       </Form>
     </Formik>
   )

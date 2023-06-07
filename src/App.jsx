@@ -25,7 +25,9 @@ export default function App() {
 
   const [values, setValues] = useState(initialValues);
   const [stepNumber, setStepNumber] = useState(1);
-  const [checked, setChecked] = useState(false);
+  const [dataSwitch, setDataSwitch] = useState(false);
+  const [voiceSwitch, setVoiceSwitch] = useState(false);
+  const [videoSwitch, setVideoSwitch] = useState(false);
 
   const handleNextStep = (newValues) => {
     setValues((prev) => ({ ...prev, ...newValues }));
@@ -35,12 +37,6 @@ export default function App() {
   const handlePrevStep = (newValues) => {
     setValues((prev) => ({ ...prev, ...newValues }));
     setStepNumber((prev) => prev - 1);
-  };
-
-  const handleChange = (newValues) => {
-    setChecked(!checked);
-    setValues((prev) => ({ ...prev, ...newValues }));
-    setTouched({});
   };
 
   const handleSubmit = async (values, bag) => {
@@ -55,14 +51,13 @@ export default function App() {
     }
   };
 
-  const isChecked = checked === true;
-
   const steps = [
     "Agent",
     "Customer",
     "Data",
     "Voice",
-    "Video"
+    "Video",
+    "Callback"
   ]
     
   const stepsArray = [
@@ -109,7 +104,6 @@ export default function App() {
             next={handleNextStep}
             prev={handlePrevStep}
             data={values}
-            checked={handleChange}
           />
         );
       }
@@ -119,7 +113,6 @@ export default function App() {
             next={handleNextStep}
             prev={handlePrevStep}
             data={values}
-            checked={handleChange}
           />
         );
       }
@@ -129,7 +122,15 @@ export default function App() {
             next={handleNextStep}
             prev={handlePrevStep}
             data={values}
-            checked={handleChange}
+          />
+        );
+      }
+      case 6: {
+        return (
+          <Callback
+            next={handleNextStep}
+            prev={handlePrevStep}
+            data={values}
           />
         );
       }
@@ -158,13 +159,16 @@ export default function App() {
         setStepNumber,
         values,
         setValues,
-        checked,
-        setChecked,
+        dataSwitch,
+        setDataSwitch,
+        voiceSwitch,
+        setVoiceSwitch,
+        videoSwitch,
+        setVideoSwitch,
         isLastStep,
         handleNextStep,
         handlePrevStep,
         handleSubmit,
-        isChecked,
       }}
     >
       <Card
@@ -175,7 +179,7 @@ export default function App() {
             xs: "100%",
             md: "50%",
           },
-          height: "100%",
+          height: "75%",
           borderRadius: 2,
         }}
       >    
@@ -186,7 +190,7 @@ export default function App() {
               stepNumber={stepNumber}
             />
           </Box>
-          <Box paddingBottom={2}>
+          <Box>
             {displayStep(stepNumber)}
           </Box>
         </CardContent>

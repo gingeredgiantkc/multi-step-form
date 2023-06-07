@@ -4,19 +4,13 @@ import { Form, Formik } from "formik";
 import FormikControl from "../FormikControl/FormikControl";
 import { FormContext } from "../../App";
 import { Button, Stack, Switch, ThemeProvider, createTheme } from "@mui/material";
-import { NavigateBeforeOutlined, NavigateNextOutlined } from "@mui/icons-material";
+import { NavigateBeforeOutlined } from "@mui/icons-material";
 
-const Voice = (props) => {
+const Callback = (props) => {
   const { next, prev, data } = props;
-  const { stepNumber, voiceSwitch, setVoiceSwitch } = useContext(FormContext);
+  const { stepNumber, videoSwitch, setVideoSwitch } = useContext(FormContext);
   const theme = createTheme({
     palette: {
-      primary: {
-        light: '#4ed07e',
-        main: '#22c55e',
-        dark: '#178941',
-        contrastText: '#ffffff',
-      },
       secondary: {
         light: '#afb5bf',
         main: '#9ca3af',
@@ -25,44 +19,43 @@ const Voice = (props) => {
       },
     },
   });
+
   const handleSubmit = (values) => {
     console.log("data", values);
     next(values);
   };
 
   const handleToggle = () => {
-    setVoiceSwitch(!voiceSwitch);
+    setVideoSwitch(!videoSwitch);
   };
 
   return (
     <Formik
       initialValues={data}
       validationSchema={Yup.object().shape({
-        voice: voiceSwitch ? Yup.string() : Yup.string().required('Required'),
+        video: videoSwitch ? Yup.string() : Yup.string().required('Required'),
       })}
       onSubmit={handleSubmit}
     >
       {({values}) => (
         <Form>
           <div className="grid grid-cols-12 grid-rows-6 gap-2">
-            <div className="col-span-4 col-start-5 text-center">
-              <h1 className="text-gray-700 py-6 font-bold text-2xl">Order Change</h1>
+            <div className="col-span-8 col-start-3 text-center">
+              <h1 className="text-gray-700 pt-3 pb-0 font-bold text-2xl">Scheduled Follow-Up</h1>
             </div>        
-            <div className="col-span-5 col-start-2 row-span-2">
-              <FormikControl
-                control="textarea"
-                label="Voice Service"
-                name="voice"
-                disabled={voiceSwitch}
-                placeholder="Enter service and equipment changes here."
-              />
+            <div className="row-start-2 col-span-5 col-start-2">
+                <FormikControl
+                  control="date"
+                  label="Video Service"
+                  name="date"
+                />
             </div>
             <div className="row-start-4 col-start-2 col-span-5 place-self-end">
               <span className="text-xs text-gray-700">
-                No Voice/No changes made to Voice service
+                No Video/No changes made to Video service
               </span>
               <Switch
-                checked={voiceSwitch}
+                checked={videoSwitch}
                 onChange={handleToggle}
               />
             </div>
@@ -82,10 +75,9 @@ const Voice = (props) => {
                   <Button
                     color="primary"
                     variant="contained"
-                    endIcon={<NavigateNextOutlined />}
                     type="submit"
                   >
-                    Next
+                    Confirm
                   </Button>
                 </Stack>
               </ThemeProvider>
@@ -97,4 +89,4 @@ const Voice = (props) => {
   )
 };
 
-export default Voice;
+export default Video;

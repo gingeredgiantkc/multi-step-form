@@ -1,25 +1,45 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from "react";
 import * as Yup from "yup";
-import { Form, Formik } from 'formik';
-import FormikControl from '../FormikControl/FormikControl';
-import { FormContext } from '../../App';
-import { Switch } from '@mui/material';
+import { Form, Formik } from "formik";
+import FormikControl from "../FormikControl/FormikControl";
+import { FormContext } from "../../App";
+import { Button, Stack, Switch, ThemeProvider, createTheme } from "@mui/material";
+import { NavigateBeforeOutlined, NavigateNextOutlined } from "@mui/icons-material";
 
 const Data = (props) => {
-  const { next, prev, data, checked } = props;
-  const { stepNumber, isLastStep, isChecked } = useContext(FormContext);
+  const { next, prev, data } = props;
+  const { stepNumber, dataSwitch, setDataSwitch } = useContext(FormContext);
+  const theme = createTheme({
+    palette: {
+      primary: {
+        light: '#4ed07e',
+        main: '#22c55e',
+        dark: '#178941',
+        contrastText: '#ffffff',
+      },
+      secondary: {
+        light: '#afb5bf',
+        main: '#9ca3af',
+        dark: '#6d727a',
+        contrastText: '#ffffff'
+      },
+    },
+  });
 
   const handleSubmit = (values) => {
     console.log("data", values);
     next(values);
   };
 
+  const handleToggle = () => {
+    setDataSwitch(!dataSwitch);
+  };
+
   return (
     <Formik
       initialValues={data}
       validationSchema={Yup.object().shape({
-        data: Yup.string()
-          .required('Required'),
+        data: dataSwitch ? Yup.string() : Yup.string().required('Required'),
       })}
       onSubmit={handleSubmit}
     >
@@ -34,36 +54,42 @@ const Data = (props) => {
                   control="textarea"
                   label="Data Service"
                   name="data"
-                  disabled={isChecked}
+                  disabled={dataSwitch}
                   placeholder="Enter service and equipment changes here."
-                  value={isChecked ? "No service/change" : null}
                 />
             </div>
-            <div className="row-start-4 col-end-7 place-self-end">
+            <div className="row-start-4 col-start-2 col-span-5 place-self-end">
+              <span className="text-xs text-gray-700">
+                No Data/No changes made to Data service
+              </span>
               <Switch
-                checked={isChecked}
-                onChange={checked}
+                checked={dataSwitch}
+                onChange={handleToggle}
               />
             </div>
-            <div className="row-start-6 col-span-2 col-end-6 self-end justify-self-end">
-              <button
-                disabled={stepNumber <= 1}
-                type="button"
-                onClick={() => prev(values)}
-                className={`bg-gray-400 text-slate-100 uppercase transition duration-200 ease-in-out border-slate-300
-                font-semibold border-2 py-2 px-4 rounded-xl ${stepNumber <= 1 ? "opacity-50 cursor-not-allowed" : "hover:bg-slate-700 hover:text-white cursor-pointer"}`}
-              >
-                Back 
-              </button>
-            </div>
-            <div className="row-start-6 col-span-2 col-start-8 self-end">
-              <button
-                type="submit"
-                className="bg-green-500 text-slate-100 uppercase transition duration-200 ease-in-out border-slate-300
-                hover:bg-slate-700 hover:text-white font-semibold cursor-pointer border-2 py-2 px-4 rounded-xl"
-              >
-                {isLastStep ? "Done" : "Next"}
-              </button>
+            <div className="row-start-6 col-span-12 place-self-center">
+              <ThemeProvider theme={theme}>
+                <Stack direction="row" spacing={2}>
+                  <Button
+                    color="secondary"
+                    variant="contained"
+                    startIcon={<NavigateBeforeOutlined />}
+                    disabled={stepNumber <= 1}
+                    type="button"
+                    onClick={() => prev(values)}
+                  >
+                    Back
+                  </Button>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    endIcon={<NavigateNextOutlined />}
+                    type="submit"
+                  >
+                    Next
+                  </Button>
+                </Stack>
+              </ThemeProvider>
             </div>
           </div>
         </Form>

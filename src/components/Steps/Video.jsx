@@ -1,69 +1,90 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 import * as Yup from "yup";
-import { Col, Container, Row } from 'react-bootstrap';
-import { Form, Formik } from 'formik';
-import FormikControl from '../FormikControl/FormikControl';
-import { FormContext } from '../../App';
+import { Form, Formik } from "formik";
+import FormikControl from "../FormikControl/FormikControl";
+import { FormContext } from "../../App";
+import { Button, Stack, Switch, ThemeProvider, createTheme } from "@mui/material";
+import { NavigateBeforeOutlined } from "@mui/icons-material";
 
 const Video = (props) => {
   const { next, prev, data } = props;
-  const { stepNumber, isLastStep } = useContext(FormContext);
+  const { stepNumber, videoSwitch, setVideoSwitch } = useContext(FormContext);
+  const theme = createTheme({
+    palette: {
+      secondary: {
+        light: '#afb5bf',
+        main: '#9ca3af',
+        dark: '#6d727a',
+        contrastText: '#ffffff'
+      },
+    },
+  });
 
   const handleSubmit = (values) => {
     console.log("data", values);
     next(values);
   };
 
+  const handleToggle = () => {
+    setVideoSwitch(!videoSwitch);
+  };
+
   return (
     <Formik
       initialValues={data}
       validationSchema={Yup.object().shape({
-        video: Yup.string()
-          .required('Required'),
+        video: videoSwitch ? Yup.string() : Yup.string().required('Required'),
       })}
       onSubmit={handleSubmit}
     >
       {({values}) => (
         <Form>
-          <Container>
-            <Row>
-              <Col className="text-center">
-                <h1 className="text-gray-700 pb-8 font-bold text-2xl">Order Change</h1>
-              </Col>
-            </Row>
-            <Row className="ml-4 mr-0 mb-2">
-              <Col md={6}>
+          <div className="grid grid-cols-12 grid-rows-6 gap-2">
+            <div className="col-span-4 col-start-5 text-center">
+              <h1 className="text-gray-700 py-6 font-bold text-2xl">Order Change</h1>
+            </div>        
+            <div className="col-span-5 col-start-2 row-span-2">
                 <FormikControl
                   control="textarea"
                   label="Video Service"
                   name="video"
+                  disabled={videoSwitch}
                   placeholder="Enter service and equipment changes here."
                 />
-              </Col>
-            </Row>
-            <Row className="mt-6 -mb-8 items-end">
-              <Col md={{ span: 1, offset: 4 }} className="justify-center">
-                <button
-                  disabled={stepNumber <= 1}
-                  type="button"
-                  onClick={() => prev(values)}
-                  className={`bg-gray-400 text-slate-100 uppercase transition duration-200 ease-in-out border-slate-300
-                  font-semibold border-2 py-2 px-4 rounded-xl ${stepNumber <= 1 ? "opacity-50 cursor-not-allowed" : "hover:bg-slate-700 hover:text-white cursor-pointer"}`}
-                >
-                  Back 
-                </button>
-              </Col>
-              <Col md={{ span: 1, offset: 1 }} className="justify-center">
-                <button
-                  type="submit"
-                  className="bg-green-500 text-slate-100 uppercase transition duration-200 ease-in-out border-slate-300
-                  hover:bg-slate-700 hover:text-white font-semibold cursor-pointer border-2 py-2 px-4 rounded-xl"
-                >
-                  {isLastStep ? "Done" : "Next"}
-                </button>
-              </Col>
-            </Row>
-          </Container>
+            </div>
+            <div className="row-start-4 col-start-2 col-span-5 place-self-end">
+              <span className="text-xs text-gray-700">
+                No Video/No changes made to Video service
+              </span>
+              <Switch
+                checked={videoSwitch}
+                onChange={handleToggle}
+              />
+            </div>
+            <div className="row-start-6 col-span-12 place-self-center">
+              <ThemeProvider theme={theme}>
+                <Stack direction="row" spacing={2}>
+                  <Button
+                    color="secondary"
+                    variant="contained"
+                    startIcon={<NavigateBeforeOutlined />}
+                    disabled={stepNumber <= 1}
+                    type="button"
+                    onClick={() => prev(values)}
+                  >
+                    Back
+                  </Button>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    type="submit"
+                  >
+                    Confirm
+                  </Button>
+                </Stack>
+              </ThemeProvider>
+            </div>
+          </div>
         </Form>
       )}
     </Formik>

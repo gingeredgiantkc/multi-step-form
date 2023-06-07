@@ -2,9 +2,9 @@
 
 # dependencies
 /.vscode
-/node_modules
 /.pnp
-.pnp.js
+/node_modules
+/src/vite-env.d.ts
 
 # testing
 /coverage
@@ -18,16 +18,15 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.eslintrc.cjs
+.gitignore
 
-./.eslintrc.cjs
-./gitignore
-./tailwind.config.js
-./tailwind-default.config.js
-./postcss.config.js
-./tsconfig.json
-./tsconfig.node.json
-./vite.config.ts
-./src/vite-env.d.ts
+tailwind.config.js
+tailwind-default.config.js
+postcss.config.js
+tsconfig.json
+tsconfig.node.json
+vite.config.ts
 
 npm-debug.log*
 yarn-debug.log*
