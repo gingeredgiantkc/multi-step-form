@@ -1,14 +1,21 @@
-import React, { useContext } from "react";
+import React from "react";
 import * as Yup from "yup";
 import { Form, Formik } from "formik";
 import FormikControl from "../FormikControl/FormikControl";
-import { FormContext } from "../../App";
 import { Button, Stack, Switch, ThemeProvider, createTheme } from "@mui/material";
 import { NavigateBeforeOutlined, NavigateNextOutlined } from "@mui/icons-material";
+import useFormContext from "../../hooks/useFormContext";
 
-const Data = (props) => {
-  const { next, prev, data } = props;
-  const { stepNumber, dataSwitch, setDataSwitch } = useContext(FormContext);
+const Data = () => {
+  const {
+    values,
+    dataSwitch,
+    setDataSwitch,
+    handleNextStep,
+    handlePrevStep,
+    stepNumber,
+   } = useFormContext();
+
   const theme = createTheme({
     palette: {
       primary: {
@@ -28,7 +35,7 @@ const Data = (props) => {
 
   const handleSubmit = (values) => {
     console.log("data", values);
-    next(values);
+    handleNextStep(values);
   };
 
   const handleToggle = () => {
@@ -37,7 +44,7 @@ const Data = (props) => {
 
   return (
     <Formik
-      initialValues={data}
+      initialValues={values}
       validationSchema={Yup.object().shape({
         data: dataSwitch ? Yup.string() : Yup.string().required('Required'),
       })}
@@ -76,7 +83,7 @@ const Data = (props) => {
                     startIcon={<NavigateBeforeOutlined />}
                     disabled={stepNumber <= 1}
                     type="button"
-                    onClick={() => prev(values)}
+                    onClick={() => handlePrevStep(values)}
                   >
                     Back
                   </Button>

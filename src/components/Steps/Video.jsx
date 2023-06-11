@@ -1,14 +1,21 @@
-import React, { useContext } from "react";
+import React from "react";
 import * as Yup from "yup";
 import { Form, Formik } from "formik";
 import FormikControl from "../FormikControl/FormikControl";
-import { FormContext } from "../../App";
 import { Button, Stack, Switch, ThemeProvider, createTheme } from "@mui/material";
 import { NavigateBeforeOutlined } from "@mui/icons-material";
+import useFormContext from "../../hooks/useFormContext";
 
-const Video = (props) => {
-  const { next, prev, data } = props;
-  const { stepNumber, videoSwitch, setVideoSwitch } = useContext(FormContext);
+const Video = () => {
+  const {
+    values,
+    videoSwitch,
+    setVideoSwitch,
+    handleNextStep,
+    handlePrevStep,
+    stepNumber,
+   } = useFormContext();
+
   const theme = createTheme({
     palette: {
       secondary: {
@@ -22,7 +29,7 @@ const Video = (props) => {
 
   const handleSubmit = (values) => {
     console.log("data", values);
-    next(values);
+    handleNextStep(values);
   };
 
   const handleToggle = () => {
@@ -31,7 +38,7 @@ const Video = (props) => {
 
   return (
     <Formik
-      initialValues={data}
+      initialValues={values}
       validationSchema={Yup.object().shape({
         video: videoSwitch ? Yup.string() : Yup.string().required('Required'),
       })}
@@ -70,7 +77,7 @@ const Video = (props) => {
                     startIcon={<NavigateBeforeOutlined />}
                     disabled={stepNumber <= 1}
                     type="button"
-                    onClick={() => prev(values)}
+                    onClick={() => handlePrevStep(values)}
                   >
                     Back
                   </Button>

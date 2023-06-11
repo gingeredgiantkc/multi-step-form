@@ -1,14 +1,21 @@
-import React, { useContext } from "react";
+import React from "react";
 import * as Yup from "yup";
 import { Form, Formik } from "formik";
 import FormikControl from "../FormikControl/FormikControl";
-import { FormContext } from "../../App";
 import { Button, Stack, Switch, ThemeProvider, createTheme } from "@mui/material";
 import { NavigateBeforeOutlined, NavigateNextOutlined } from "@mui/icons-material";
+import useFormContext from "../../hooks/useFormContext";
 
-const Voice = (props) => {
-  const { next, prev, data } = props;
-  const { stepNumber, voiceSwitch, setVoiceSwitch } = useContext(FormContext);
+const Voice = () => {
+  const {
+    values,
+    voiceSwitch,
+    setVoiceSwitch,
+    handleNextStep,
+    handlePrevStep,
+    stepNumber,
+   } = useFormContext();
+
   const theme = createTheme({
     palette: {
       primary: {
@@ -27,7 +34,7 @@ const Voice = (props) => {
   });
   const handleSubmit = (values) => {
     console.log("data", values);
-    next(values);
+    handleNextStep(values);
   };
 
   const handleToggle = () => {
@@ -36,7 +43,7 @@ const Voice = (props) => {
 
   return (
     <Formik
-      initialValues={data}
+      initialValues={values}
       validationSchema={Yup.object().shape({
         voice: voiceSwitch ? Yup.string() : Yup.string().required('Required'),
       })}
@@ -75,7 +82,7 @@ const Voice = (props) => {
                     startIcon={<NavigateBeforeOutlined />}
                     disabled={stepNumber <= 1}
                     type="button"
-                    onClick={() => prev(values)}
+                    onClick={() => handlePrevStep(values)}
                   >
                     Back
                   </Button>

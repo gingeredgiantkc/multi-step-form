@@ -1,14 +1,19 @@
-import React, { useContext } from "react";
+import React from "react";
 import * as Yup from "yup";
 import { Form, Formik } from "formik";
 import FormikControl from "../FormikControl/FormikControl";
-import { FormContext } from "../../App";
-import { Button, Stack, Switch, ThemeProvider, createTheme } from "@mui/material";
+import { Button, Stack, ThemeProvider, createTheme } from "@mui/material";
 import { NavigateBeforeOutlined } from "@mui/icons-material";
+import useFormContext from "../../hooks/useFormContext";
 
-const Callback = (props) => {
-  const { next, prev, data } = props;
-  const { stepNumber, videoSwitch, setVideoSwitch } = useContext(FormContext);
+const Callback = () => {
+  const {
+    values,
+    handleNextStep,
+    handlePrevStep,
+    stepNumber,
+   } = useFormContext();
+
   const theme = createTheme({
     palette: {
       secondary: {
@@ -22,18 +27,14 @@ const Callback = (props) => {
 
   const handleSubmit = (values) => {
     console.log("data", values);
-    next(values);
-  };
-
-  const handleToggle = () => {
-    setVideoSwitch(!videoSwitch);
+    handleNextStep(values);
   };
 
   return (
     <Formik
-      initialValues={data}
+      initialValues={values}
       validationSchema={Yup.object().shape({
-        video: videoSwitch ? Yup.string() : Yup.string().required('Required'),
+        date: Yup.string().required('Required'),
       })}
       onSubmit={handleSubmit}
     >
@@ -46,18 +47,8 @@ const Callback = (props) => {
             <div className="row-start-2 col-span-5 col-start-2">
                 <FormikControl
                   control="date"
-                  label="Video Service"
                   name="date"
                 />
-            </div>
-            <div className="row-start-4 col-start-2 col-span-5 place-self-end">
-              <span className="text-xs text-gray-700">
-                No Video/No changes made to Video service
-              </span>
-              <Switch
-                checked={videoSwitch}
-                onChange={handleToggle}
-              />
             </div>
             <div className="row-start-6 col-span-12 place-self-center">
               <ThemeProvider theme={theme}>
@@ -68,7 +59,7 @@ const Callback = (props) => {
                     startIcon={<NavigateBeforeOutlined />}
                     disabled={stepNumber <= 1}
                     type="button"
-                    onClick={() => prev(values)}
+                    onClick={() => handlePrevStep(values)}
                   >
                     Back
                   </Button>
@@ -89,4 +80,4 @@ const Callback = (props) => {
   )
 };
 
-export default Video;
+export default Callback;

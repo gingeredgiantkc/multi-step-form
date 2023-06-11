@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
+import useFormContext from '../hooks/useFormContext';
 
-const Stepper = ({ steps, stepNumber }) => {
+const Stepper = () => {
+  const { steps, stepNumber } = useFormContext();
   const [newStep, setNewStep] = useState([]);
   const stepRef = useRef();
 

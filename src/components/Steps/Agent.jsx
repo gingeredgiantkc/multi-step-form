@@ -1,17 +1,22 @@
-import React, { useContext } from "react";
+import React from "react";
 import * as Yup from "yup";
 import { Form, Formik } from "formik";
 import FormikControl from "../FormikControl/FormikControl";
-import { FormContext } from "../../App";
 import { Button, Stack, ThemeProvider, createTheme } from "@mui/material";
 import { NavigateBeforeOutlined, NavigateNextOutlined } from "@mui/icons-material";
+import useFormContext from "../../hooks/useFormContext";
 
-const Agent = (props) => {
-  const { data, next, prev } = props;
-  const { stepNumber } = useContext(FormContext);
-  const handleSubmit = (values) => {
+const Agent = () => {
+  const {
+    values,
+    handleNextStep,
+    handlePrevStep,
+    stepNumber,
+   } = useFormContext();
+
+ const handleSubmit = (values) => {
     console.log("data", values);
-    next(values);
+    handleNextStep(values);
   };
   const theme = createTheme({
     palette: {
@@ -31,7 +36,7 @@ const Agent = (props) => {
   });
   return (
     <Formik
-      initialValues={data}
+      initialValues={values}
       validationSchema={Yup.object().shape({
         firstName: Yup.string()
           .min(2, 'Must contain 2 characters')
@@ -95,7 +100,7 @@ const Agent = (props) => {
                   startIcon={<NavigateBeforeOutlined />}
                   disabled={stepNumber <= 1}
                   type="button"
-                  onClick={() => prev(values)}
+                  onClick={() => handlePrevStep(values)}
                 >
                   Back
                 </Button>
