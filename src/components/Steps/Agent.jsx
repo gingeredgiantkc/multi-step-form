@@ -1,4 +1,5 @@
 import React from "react";
+import FtrSvg from "/frontier.svg";
 import * as Yup from "yup";
 import { Form, Formik } from "formik";
 import FormikControl from "../FormikControl/FormikControl";
@@ -53,6 +54,7 @@ const Agent = () => {
       })}
       onSubmit={handleSubmit}
     >
+      {({values, isValid}) => (
       <Form>
         <div className="grid grid-cols-12 grid-rows-6 gap-2">
           <div className="col-span-4 col-start-5 text-center">
@@ -74,6 +76,9 @@ const Agent = () => {
               label="Last Name"
               type="text"
             />
+          </div>
+          <div className="col-start-8 col-span-4 row-span-3">
+            <img src={FtrSvg} alt="Frontier Icon" />
           </div>
           <div className="row-start-4 col-start-2 col-span-5">
             <FormikControl
@@ -108,7 +113,9 @@ const Agent = () => {
                   color="primary"
                   variant="contained"
                   endIcon={<NavigateNextOutlined />}
-                  type="submit"
+                  type="button"
+                  onClick={() => handleNextStep(values)}
+                  disabled={!isValid}
                 >
                   Next
                 </Button>
@@ -117,6 +124,7 @@ const Agent = () => {
           </div>
         </div>
       </Form>
+      )}
     </Formik>
   )
 };

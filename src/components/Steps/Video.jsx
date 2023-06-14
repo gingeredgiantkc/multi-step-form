@@ -16,8 +16,14 @@ const Video = () => {
     stepNumber,
    } = useFormContext();
 
-  const theme = createTheme({
+   const theme = createTheme({
     palette: {
+      primary: {
+        light: '#4ed07e',
+        main: '#22c55e',
+        dark: '#178941',
+        contrastText: '#ffffff',
+      },
       secondary: {
         light: '#afb5bf',
         main: '#9ca3af',
@@ -86,7 +92,7 @@ const Video = () => {
                     variant="contained"
                     type="submit"
                   >
-                    Confirm
+                    Next
                   </Button>
                 </Stack>
               </ThemeProvider>

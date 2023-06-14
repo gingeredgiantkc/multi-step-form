@@ -1,42 +1,55 @@
-import React, { useContext } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
-import { Form, useFormikContext } from 'formik';
-import { FormContext } from './App';
+import React from 'react';
+import { Button, Stack, ThemeProvider, createTheme } from "@mui/material";
+import { NavigateBeforeOutlined, NavigateNextOutlined } from "@mui/icons-material";
+import useFormContext from "../../hooks/useFormContext";
 
+const Navigation = () => {
+  const { values, stepNumber, handlePrevStep, handleNextStep } = useFormContext();
+  const handleSubmit = (values) => {
+    console.log("data", values);
+    handleNextStep(values);
+  };
+  const theme = createTheme({
+    palette: {
+      primary: {
+        light: '#4ed07e',
+        main: '#22c55e',
+        dark: '#178941',
+        contrastText: '#ffffff',
+      },
+      secondary: {
+        light: '#afb5bf',
+        main: '#9ca3af',
+        dark: '#6d727a',
+        contrastText: '#ffffff'
+      },
+    },
+  });
 
-const Navigation = (props) => {
-  const { noPrevious, isLastStep, handleSubmit } = props;
-  const { prev, next } = useContext(FormContext);
   return (
-    <Form onSubmit={handleSubmit}>
-      <Container>
-        <Row xs={3} className='justify-center'>
-          <Col xs={{ span: 6, offset: 3}} className='justify-end'>
-            <button
-              disabled={noPrevious}
-              type="button"
-              onClick={() => prev(data)}
-              className={`bg-gray-400 text-slate-500 uppercase transition duration-200 ease-in-out border-slate-300
-              font-semibold border-2 py-2 px-4 rounded-xl ${noPrevious ? "opacity-50 cursor-not-allowed" : "hover:bg-slate-700 hover:text-white cursor-pointer"}`}
-            >
-              Back 
-            </button>
-            <button
-              disabled={!isValid || isSubmitting || (
-                Object.keys(touched).length === 0 && touched.constructor === Object
-              )}
-              type="submit"
-              className="bg-green-500 text-slate-100 uppercase transition duration-200 ease-in-out border-slate-300
-              hover:bg-slate-700 hover:text-white font-semibold cursor-pointer border-2 py-2 px-4 rounded-xl"
-            >
-              {isLastStep ? "Submit" : "Next"}
-            </button>
-          </Col>
-        </Row>
-      </Container>
-    </Form>
-	)
+    <ThemeProvider theme={theme}>
+      <Stack direction="row" spacing={2}>
+        <Button
+          color="secondary"
+          variant="contained"
+          startIcon={<NavigateBeforeOutlined />}
+          disabled={stepNumber <= 1}
+          type="button"
+          onClick={() => handlePrevStep(values)}
+        >
+          Back
+        </Button>
+        <Button
+          color="primary"
+          variant="contained"
+          endIcon={<NavigateNextOutlined />}
+          type="submit"
+        >
+          Next
+        </Button>
+      </Stack>
+    </ThemeProvider>
+  );
 };
 
 export default Navigation;
-//Wizard.js

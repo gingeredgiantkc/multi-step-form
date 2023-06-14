@@ -5,13 +5,13 @@ const FormContext = createContext({})
 export const FormProvider = ({ children }) => {
 
   const title = {
-    0: "Agent Info",
-    1: "Customer Info",
-    2: "Order Change",
+    1: "Agent Info",
+    2: "Customer Info",
     3: "Order Change",
     4: "Order Change",
-    5: "Follow-Up",
-    6: "Review & Submit"
+    5: "Order Change",
+    6: "Follow-Up",
+    7: "Review & Submit"
   }
 
   const steps = [
@@ -58,6 +58,7 @@ export const FormProvider = ({ children }) => {
   }
   
   const handleNextStep = (newValues) => {
+    console.log(values);
     setValues((prev) => ({ ...prev, ...newValues }));
     setStepNumber((prev) => prev + 1);
   };
@@ -66,8 +67,6 @@ export const FormProvider = ({ children }) => {
     setValues((prev) => ({ ...prev, ...newValues }));
     setStepNumber((prev) => prev - 1);
   };
-
-
 
   const { campaign, ...requiredInputs } = values
   const canSubmit = [...Object.values(requiredInputs)].every(Boolean) && page === Object.keys(title).length - 1

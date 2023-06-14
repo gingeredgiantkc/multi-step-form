@@ -6,6 +6,7 @@ import Data from "./Steps/Data";
 import Voice from "./Steps/Voice";
 import Video from "./Steps/Video";
 import Callback from "./Steps/Callback";
+import Confirm from "./Steps/Confirm";
 
 const FormInputs = () => {
 
@@ -56,6 +57,11 @@ const FormInputs = () => {
       case 6: {
         return (
           <Callback />
+        );
+      }
+      case 7: {
+        return (
+          <Confirm />
         );
       }
       default: return null;

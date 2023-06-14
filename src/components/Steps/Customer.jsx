@@ -51,7 +51,7 @@ const Customer = () => {
       })}
       onSubmit={handleSubmit}
     >
-      {({values}) => (
+      {({values, isValid}) => (
         <Form>
           <div className="grid grid-cols-12 grid-rows-6 gap-0">
             <div className="col-span-8 col-start-3 text-center">
@@ -115,7 +115,9 @@ const Customer = () => {
                     color="primary"
                     variant="contained"
                     endIcon={<NavigateNextOutlined />}
-                    type="submit"
+                    type="button"
+                    onClick={() => handleNextStep(values)}
+                    disabled={!isValid}
                   >
                     Next
                   </Button>
