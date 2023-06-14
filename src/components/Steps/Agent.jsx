@@ -1,5 +1,5 @@
 import React from "react";
-import FtrSvg from "/frontier.svg";
+import FtrSvg from "../../frontier.svg";
 import * as Yup from "yup";
 import { Form, Formik } from "formik";
 import FormikControl from "../FormikControl/FormikControl";
