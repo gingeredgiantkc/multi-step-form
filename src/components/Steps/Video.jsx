@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import { Form, Formik } from "formik";
 import FormikControl from "../FormikControl/FormikControl";
 import { Button, Stack, Switch, ThemeProvider, createTheme } from "@mui/material";
-import { NavigateBeforeOutlined } from "@mui/icons-material";
+import { NavigateBeforeOutlined, NavigateNextOutlined } from "@mui/icons-material";
 import useFormContext from "../../hooks/useFormContext";
 
 const Video = () => {
@@ -90,6 +90,7 @@ const Video = () => {
                   <Button
                     color="primary"
                     variant="contained"
+                    endIcon={<NavigateNextOutlined />}
                     type="submit"
                   >
                     Next

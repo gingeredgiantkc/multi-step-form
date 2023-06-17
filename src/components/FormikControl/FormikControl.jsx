@@ -1,28 +1,31 @@
 import SelectInput from "./SelectInput";
 import TextArea from "./TextArea";
-import Input from "./Input";
+import TextField from "./TextField";
 import PropTypes from "prop-types";
-import TimePickers from "./TimePickers";
 import DatePickers from "./DatePicker";
 import FormRadio from "./FormRadio";
 import FormCheckBox from "./FormCheckBox";
+import DateTimePickers from "./DateTimePicker";
+import TimePickers from "./TimePicker";
 
-const FormikControl = ({ control, ...rest }) => {
+const FormikControl = ({ control, ...props }) => {
   switch (control) {
     case "input":
-      return <Input {...rest} />;
+      return <TextField {...props} />;
     case "textarea":
-      return <TextArea {...rest} />;
+      return <TextArea {...props} />;
     case "select":
-      return <SelectInput {...rest} />;
+      return <SelectInput {...props} />;
     case "radio":
-      return <FormRadio {...rest} />;
-    case "time":
-      return <TimePickers {...rest} />;
+      return <FormRadio {...props} />;
+    case "dateTime":
+      return <DateTimePickers {...props} />;
     case "date":
-      return <DatePickers {...rest} />;
+      return <DatePickers {...props} />;
     case "checkbox":
-      return <FormCheckBox {...rest} />;
+      return <FormCheckBox {...props} />;
+      case "time":
+        return <TimePickers {...props} />;  
     default:
       return null;
   }

@@ -12,7 +12,7 @@ const Callback = () => {
     handleNextStep,
     handlePrevStep,
     stepNumber,
-   } = useFormContext();
+  } = useFormContext();
 
   const theme = createTheme({
     palette: {
@@ -34,7 +34,8 @@ const Callback = () => {
     <Formik
       initialValues={values}
       validationSchema={Yup.object().shape({
-        date: Yup.string().required('Required'),
+        date: Yup.string(),
+        time: Yup.string(),
       })}
       onSubmit={handleSubmit}
     >
@@ -44,11 +45,19 @@ const Callback = () => {
             <div className="col-span-8 col-start-3 text-center">
               <h1 className="text-gray-700 pt-3 pb-0 font-bold text-2xl">Scheduled Follow-Up</h1>
             </div>        
-            <div className="row-start-2 col-span-5 col-start-2">
-                <FormikControl
-                  control="date"
-                  name="date"
-                />
+            <div className="row-start-2 col-span-4 col-start-2">
+              <FormikControl
+                control="date"
+                label="Follow-Up Date"
+                name="date"
+              />
+            </div>
+            <div className="col-start-8 col-span-4">
+              <FormikControl
+                control="time"
+                label="Follow-Up Time"
+                name="time"
+              />
             </div>
             <div className="row-start-6 col-span-12 place-self-center">
               <ThemeProvider theme={theme}>

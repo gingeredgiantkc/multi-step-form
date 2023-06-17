@@ -1,19 +1,10 @@
+import dayjs from "dayjs";
 import { createContext, useState } from "react";
 
 const FormContext = createContext({})
 
 export const FormProvider = ({ children }) => {
-
-  const title = {
-    1: "Agent Info",
-    2: "Customer Info",
-    3: "Order Change",
-    4: "Order Change",
-    5: "Order Change",
-    6: "Follow-Up",
-    7: "Review & Submit"
-  }
-
+  
   const steps = [
     "Agent",
     "Customer",
@@ -24,13 +15,11 @@ export const FormProvider = ({ children }) => {
     "Confirm"
   ]
 
-  const [page, setPage] = useState(0)
   const [stepNumber, setStepNumber] = useState(1)
   const [dataSwitch, setDataSwitch] = useState(false);
   const [voiceSwitch, setVoiceSwitch] = useState(false);
   const [videoSwitch, setVideoSwitch] = useState(false);
   const [values, setValues] = useState({
-    campaign: 'Frontier',
     firstName: '',
     lastName: '',
     email: '',
@@ -43,22 +32,10 @@ export const FormProvider = ({ children }) => {
     video: '',
     voice: '',
     date: '',
+    time: '',
   })
 
-  const handleChange = e => {
-    const type = e.target.type
-    const name = e.target.name
-    const value = type === "checkbox"
-      ? e.target.checked
-      : e.target.value
-    setValues(prevData => ({
-      ...prevData,
-      [name]: value
-    }))
-  }
-  
   const handleNextStep = (newValues) => {
-    console.log(values);
     setValues((prev) => ({ ...prev, ...newValues }));
     setStepNumber((prev) => prev + 1);
   };
@@ -68,16 +45,10 @@ export const FormProvider = ({ children }) => {
     setStepNumber((prev) => prev - 1);
   };
 
-  const { campaign, ...requiredInputs } = values
-  const canSubmit = [...Object.values(requiredInputs)].every(Boolean) && page === Object.keys(title).length - 1
-
   return (
     <FormContext.Provider
       value={{
-        title,
         steps,
-        page,
-        setPage,
         stepNumber,
         setStepNumber,
         values,
@@ -88,8 +59,6 @@ export const FormProvider = ({ children }) => {
         setVideoSwitch,
         voiceSwitch,
         setVoiceSwitch,
-        canSubmit,
-        handleChange,
         handlePrevStep,
         handleNextStep,
       }}

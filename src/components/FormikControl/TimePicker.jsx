@@ -1,18 +1,23 @@
 import React from "react";
 import { Field, useFormikContext, useField } from "formik";
-import TextField from "./TextField";
+import { TextField, FormLabel } from "@mui/material";
 import PropTypes from "prop-types";
 import { TimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import dayjs from "dayjs";
 
 const Times = ({ name, ...rest }) => {
   const { setFieldValue } = useFormikContext();
+  const handleChange = (newTime) => {
+    let cbTime = dayjs(newTime).toJSON().slice(11, -5);
+    setFieldValue(name, cbTime);
+  }
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <TimePicker
         {...rest}
-        onChange={(val) => setFieldValue(name, val)}
+        onChange={handleChange}
         renderInput={(params) => <TextField {...params} />}
       />
     </LocalizationProvider>
@@ -24,16 +29,11 @@ Times.propTypes = {
 };
 
 const TimePickers = (props) => {
-  const { name, label, ...rest } = props;
-  const [field] = useField(name);
+  const { label, ...rest } = props;
+  const [field, meta] = useField(props);
   return (
     <React.Fragment>
-      <label
-        htmlFor={name}
-        className="block text-gray-700 text-md font-bold mb-1"
-      >
-        {label}
-      </label>
+      <FormLabel>{label}</FormLabel>
       <Field as={Times} {...field} {...rest} />
       <div className={`text-sm mb-1 ${meta.touched && meta.error ? "text-torch-red" : "opacity-0"}`}>
         <ErrorOutlineIcon fontSize="small" color="error" /> {meta.error}
@@ -44,7 +44,6 @@ const TimePickers = (props) => {
 
 TimePickers.propTypes = {
   label: PropTypes.string,
-  name: PropTypes.string,
 };
 
 export default TimePickers;
