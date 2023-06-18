@@ -3,18 +3,6 @@ import { Backdrop, Box, Button, createTheme, Fade, Modal, Stack, ThemeProvider }
 import { NavigateBeforeOutlined } from "@mui/icons-material";
 import useFormContext from '../hooks/useFormContext'
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 600,
-  bgcolor: 'background.paper',
-  border: '2px solid grey.300',
-  boxshadow: 36,
-  p: 4,
-};
-
 export default function Agreement() {
   const theme = createTheme({
     palette: {
@@ -38,6 +26,7 @@ export default function Agreement() {
     console.log("data", values);
     handleNextStep(values);
     handleClose(values);
+
     const requestOptions = {
       method: "POST",
       headers: {
