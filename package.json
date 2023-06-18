@@ -63,6 +63,7 @@
     "eslint-plugin-react-refresh": "^0.4.0",
     "events": "^3.3.0",
     "postcss": "^8.4.23",
+    "postgres": "^3.3.5",
     "querystring-es3": "^0.2.1",
     "tailwindcss": "^3.3.2",
     "typescript": "^5.0.4",
