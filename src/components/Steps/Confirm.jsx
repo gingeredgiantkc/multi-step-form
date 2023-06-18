@@ -3,6 +3,7 @@ import { NavigateBeforeOutlined, NavigateNextOutlined } from "@mui/icons-materia
 import { Formik, Form } from "formik";
 import React from 'react';
 import useFormContext from '../../hooks/useFormContext';
+import Modal from "../Modal";
 
 const Confirm = () => {
   const { handleOpen } = useFormContext();
@@ -22,11 +23,16 @@ const Confirm = () => {
       },
     },
   });
+  
+  const handleSubmit = (values) => {
+    console.log("data", values);
+    handleOpen(values)
+  };
 
   return (
     <Formik
       initialValues={values}
-      onSubmit={handleOpen}
+      onSubmit={handleSubmit}
     >
       {({values}) => (
         <Form>
@@ -186,6 +192,7 @@ const Confirm = () => {
                   </Button>
                 </Stack>
               </ThemeProvider>
+              <Modal />
             </div>
           </div>
         </Form>

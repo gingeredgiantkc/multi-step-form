@@ -45,8 +45,15 @@ export const FormProvider = ({ children }) => {
     setStepNumber((prev) => prev - 1);
   };
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpen = (newValues) => {
+    setValues((prev) => ({ ...prev, ...newValues }));
+    setOpen(true);
+  };
+
+  const handleClose = (newValues) => {
+    setValues((prev) => ({ ...prev, ...newValues }));
+    setOpen(false);
+  };
 
   return (
     <FormContext.Provider
