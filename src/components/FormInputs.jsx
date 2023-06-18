@@ -65,6 +65,11 @@ const FormInputs = () => {
           <Confirm />
         );
       }
+      case 8: {
+        return (
+          <Success />
+        );
+      }
       default: return null;
     }
   }
