@@ -113,8 +113,7 @@ const Agent = () => {
                   color="primary"
                   variant="contained"
                   endIcon={<NavigateNextOutlined />}
-                  type="button"
-                  onClick={() => handleNextStep(values)}
+                  type="submit"
                   disabled={!isValid}
                 >
                   Next

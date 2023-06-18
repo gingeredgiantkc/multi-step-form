@@ -7,6 +7,7 @@ import Voice from "./Steps/Voice";
 import Video from "./Steps/Video";
 import Callback from "./Steps/Callback";
 import Confirm from "./Steps/Confirm";
+import Success from "./Steps/Success";
 
 const FormInputs = () => {
 

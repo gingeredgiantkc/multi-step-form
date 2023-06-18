@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import { createContext, useState } from "react";
 
 const FormContext = createContext({})
@@ -15,6 +14,7 @@ export const FormProvider = ({ children }) => {
     "Confirm"
   ]
 
+  const [open, setOpen] = useState(false)
   const [stepNumber, setStepNumber] = useState(1)
   const [dataSwitch, setDataSwitch] = useState(false);
   const [voiceSwitch, setVoiceSwitch] = useState(false);
@@ -45,10 +45,15 @@ export const FormProvider = ({ children }) => {
     setStepNumber((prev) => prev - 1);
   };
 
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <FormContext.Provider
       value={{
         steps,
+        open,
+        setOpen,
         stepNumber,
         setStepNumber,
         values,
@@ -61,6 +66,8 @@ export const FormProvider = ({ children }) => {
         setVoiceSwitch,
         handlePrevStep,
         handleNextStep,
+        handleOpen,
+        handleClose,
       }}
     >
       {children}
