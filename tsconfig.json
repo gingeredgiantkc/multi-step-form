@@ -23,6 +23,6 @@
     "noImplicitThis": false,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "firebase.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
