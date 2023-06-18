@@ -1,6 +1,7 @@
 import Stepper from './Stepper';
 import FormInputs from './FormInputs'
 import { Card, CardContent, Box } from '@mui/material';
+import Agreement from './Agreement';
 
 const Form = () => {
   const content = (
@@ -24,6 +25,7 @@ const Form = () => {
           <FormInputs />
         </Box>
       </CardContent>
+      <Agreement />
     </Card>
   )
   return content

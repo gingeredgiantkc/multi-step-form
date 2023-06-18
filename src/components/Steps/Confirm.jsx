@@ -196,7 +196,6 @@ const Confirm = () => {
                   </Button>
                 </Stack>
               </ThemeProvider>
-              <Agreement />
             </div>
           </div>
         </Form>

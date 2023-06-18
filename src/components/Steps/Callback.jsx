@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import { Form, Formik } from "formik";
 import FormikControl from "../FormikControl/FormikControl";
 import { Button, Stack, ThemeProvider, createTheme } from "@mui/material";
-import { NavigateBeforeOutlined } from "@mui/icons-material";
+import { NavigateBeforeOutlined, NavigateNextOutlined } from "@mui/icons-material";
 import useFormContext from "../../hooks/useFormContext";
 
 const Callback = () => {
@@ -16,6 +16,12 @@ const Callback = () => {
 
   const theme = createTheme({
     palette: {
+      primary: {
+        light: '#4ed07e',
+        main: '#22c55e',
+        dark: '#178941',
+        contrastText: '#ffffff',
+      },
       secondary: {
         light: '#afb5bf',
         main: '#9ca3af',
@@ -39,27 +45,27 @@ const Callback = () => {
       })}
       onSubmit={handleSubmit}
     >
-      {({values}) => (
+      {({ values, isValid }) => (
         <Form>
-          <div className="grid grid-cols-12 grid-rows-6 gap-2">
-            <div className="col-span-8 col-start-3 text-center">
-              <h1 className="text-gray-700 pt-3 pb-0 font-bold text-2xl">Scheduled Follow-Up</h1>
+          <div className="grid grid-cols-12 grid-rows-4 gap-2">
+            <div className="col-span-full text-center text-gray-700 pt-3 my-auto font-bold text-2xl">
+              Scheduled Follow-Up
             </div>        
-            <div className="row-start-2 col-span-4 col-start-2">
+            <div className="row-start-2 col-start-5 col-span-4">
               <FormikControl
                 control="date"
                 label="Follow-Up Date"
                 name="date"
               />
             </div>
-            <div className="col-start-8 col-span-4">
+            <div className="row-start-3 col-start-5 col-span-4">
               <FormikControl
                 control="time"
                 label="Follow-Up Time"
                 name="time"
               />
             </div>
-            <div className="row-start-6 col-span-12 place-self-center">
+            <div className="row-start-4 col-span-12 place-self-center mt-auto">
               <ThemeProvider theme={theme}>
                 <Stack direction="row" spacing={2}>
                   <Button
@@ -75,9 +81,11 @@ const Callback = () => {
                   <Button
                     color="primary"
                     variant="contained"
+                    endIcon={<NavigateNextOutlined />}
                     type="submit"
+                    disabled={!isValid}
                   >
-                    Confirm
+                    Next
                   </Button>
                 </Stack>
               </ThemeProvider>
