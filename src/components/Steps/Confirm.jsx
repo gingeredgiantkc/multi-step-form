@@ -1,12 +1,16 @@
-import { List, ListItem, Button, Stack, ThemeProvider, createTheme, ListItemText, LinearProgress } from "@mui/material";
+import { List, ListItem, Button, Stack, ThemeProvider, createTheme, ListItemText } from "@mui/material";
 import { NavigateBeforeOutlined, NavigateNextOutlined } from "@mui/icons-material";
 import { Formik, Form } from "formik";
 import React from 'react';
 import useFormContext from '../../hooks/useFormContext';
-import Modal from "../Modal";
+import Agreement from "../Agreement";
 
 const Confirm = () => {
-  const { handleOpen } = useFormContext();
+  const {
+    handleOpen,
+    values,
+    handlePrevStep
+  } = useFormContext();
   const theme = createTheme({
     palette: {
       primary: {
@@ -192,7 +196,7 @@ const Confirm = () => {
                   </Button>
                 </Stack>
               </ThemeProvider>
-              <Modal />
+              <Agreement />
             </div>
           </div>
         </Form>

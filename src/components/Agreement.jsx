@@ -15,7 +15,7 @@ const style = {
   p: 4,
 };
 
-export default function Modal() {
+export default function Agreement() {
   const theme = createTheme({
     palette: {
       secondary: {
@@ -65,7 +65,7 @@ export default function Modal() {
       .catch(error => console.log('error', error));
     handleNextStep(values);
   };
-  
+
   return (
     <Formik
       initialValues={values}
