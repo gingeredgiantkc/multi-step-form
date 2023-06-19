@@ -40,12 +40,12 @@ const Callback = () => {
     <Formik
       initialValues={values}
       validationSchema={Yup.object().shape({
-        date: Yup.string(),
-        time: Yup.string(),
+        date: Yup.string().required('Required'),
+        time: Yup.string().required('Required'),
       })}
       onSubmit={handleSubmit}
     >
-      {({ values, isValid }) => (
+      {({values}) => (
         <Form>
           <div className="grid grid-cols-12 grid-rows-4 gap-2">
             <div className="col-span-full text-center text-gray-700 pt-3 my-auto font-bold text-2xl">
@@ -65,7 +65,7 @@ const Callback = () => {
                 name="time"
               />
             </div>
-            <div className="row-start-4 col-span-12 place-self-center mt-auto">
+            <div className="row-start-4 col-span-full place-self-center mt-auto">
               <ThemeProvider theme={theme}>
                 <Stack direction="row" spacing={2}>
                   <Button
@@ -83,7 +83,6 @@ const Callback = () => {
                     variant="contained"
                     endIcon={<NavigateNextOutlined />}
                     type="submit"
-                    disabled={!isValid}
                   >
                     Next
                   </Button>

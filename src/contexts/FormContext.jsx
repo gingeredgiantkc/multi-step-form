@@ -7,18 +7,16 @@ export const FormProvider = ({ children }) => {
   const steps = [
     "Agent",
     "Customer",
-    "Data",
-    "Voice",
-    "Video",
+    "Order",
     "Callback",
     "Confirm"
   ]
 
   const [open, setOpen] = useState(false)
   const [stepNumber, setStepNumber] = useState(1)
-  const [dataSwitch, setDataSwitch] = useState(false);
-  const [voiceSwitch, setVoiceSwitch] = useState(false);
-  const [videoSwitch, setVideoSwitch] = useState(false);
+  const [data, setData] = useState(false);
+  const [voice, setVoice] = useState(false);
+  const [video, setVideo] = useState(false);
   const [values, setValues] = useState({
     firstName: '',
     lastName: '',
@@ -55,6 +53,10 @@ export const FormProvider = ({ children }) => {
     setOpen(false);
   };
 
+  const handleNewData = () => setData(!data)
+  const handleNewVoice = () => setVoice(!voice)
+  const handleNewVideo = () => setVideo(!video)
+
   return (
     <FormContext.Provider
       value={{
@@ -65,16 +67,19 @@ export const FormProvider = ({ children }) => {
         setStepNumber,
         values,
         setValues,
-        dataSwitch,
-        setDataSwitch,
-        videoSwitch,
-        setVideoSwitch,
-        voiceSwitch,
-        setVoiceSwitch,
+        data,
+        setData,
+        video,
+        setVideo,
+        voice,
+        setVoice,
         handlePrevStep,
         handleNextStep,
         handleOpen,
         handleClose,
+        handleNewData,
+        handleNewVoice,
+        handleNewVideo,
       }}
     >
       {children}

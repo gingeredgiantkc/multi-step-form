@@ -2,9 +2,7 @@ import React from "react";
 import useFormContext from "../hooks/useFormContext"
 import Agent from "./Steps/Agent";
 import Customer from "./Steps/Customer";
-import Data from "./Steps/Data";
-import Voice from "./Steps/Voice";
-import Video from "./Steps/Video";
+import Order from "./Steps/Order";
 import Callback from "./Steps/Callback";
 import Confirm from "./Steps/Confirm";
 import Success from "./Steps/Success";
@@ -42,30 +40,20 @@ const FormInputs = () => {
       }
       case 3: {
         return (
-          <Data />
+          <Order />
         );
       }
       case 4: {
         return (
-          <Voice />
+          <Callback />
         );
       }
       case 5: {
         return (
-          <Video />
-        );
-      }
-      case 6: {
-        return (
-          <Callback />
-        );
-      }
-      case 7: {
-        return (
           <Confirm />
         );
       }
-      case 8: {
+      case 6: {
         return (
           <Success />
         );

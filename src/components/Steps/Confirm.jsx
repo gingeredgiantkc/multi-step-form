@@ -174,7 +174,7 @@ const Confirm = () => {
                 </ListItem>
               </List>
             </div>
-            <div className="row-start-7 col-span-12 place-self-center">
+            <div className="row-start-7 col-span-12 place-self-center mt-auto">
               <ThemeProvider theme={theme}>
                 <Stack direction="row" spacing={2}>
                   <Button

@@ -8,17 +8,13 @@ import { NavigateBeforeOutlined, NavigateNextOutlined } from "@mui/icons-materia
 import useFormContext from "../../hooks/useFormContext";
 
 const Agent = () => {
-  const {
-    values,
-    handleNextStep,
-    handlePrevStep,
-    stepNumber,
-   } = useFormContext();
+  const { values, handleNextStep, handlePrevStep } = useFormContext();
 
- const handleSubmit = (values) => {
+  const handleSubmit = (values) => {
     console.log("data", values);
     handleNextStep(values);
   };
+  
   const theme = createTheme({
     palette: {
       primary: {
@@ -54,10 +50,10 @@ const Agent = () => {
       })}
       onSubmit={handleSubmit}
     >
-      {({values, isValid}) => (
+      {({values}) => (
       <Form>
         <div className="grid grid-cols-12 grid-rows-6 gap-2">
-          <div className="col-span-4 col-start-5 text-center">
+          <div className="col-span-full text-center my-auto">
             <h1 className="text-gray-700 pt-3 pb-0 font-bold text-2xl">Agent Information</h1>
           </div>
           <div className="col-span-5 col-start-2">
@@ -77,7 +73,7 @@ const Agent = () => {
               type="text"
             />
           </div>
-          <div className="col-start-8 col-span-4 row-span-3">
+          <div className="row-start-3 col-start-8 col-span-4 row-span-3 place-content-center">
             <img src={FtrSvg} alt="Frontier Icon" />
           </div>
           <div className="row-start-4 col-start-2 col-span-5">
@@ -96,16 +92,16 @@ const Agent = () => {
               type="text"
             />
           </div>
-          <div className="row-start-6 col-span-12 place-self-center">
+          <div className="row-start-6 col-span-12 place-self-center mt-auto">
             <ThemeProvider theme={theme}>
               <Stack direction="row" spacing={2}>
                 <Button
                   color="secondary"
                   variant="contained"
                   startIcon={<NavigateBeforeOutlined />}
-                  disabled={stepNumber <= 1}
-                  type="button"
+                  disabled
                   onClick={() => handlePrevStep(values)}
+                  type="button"
                 >
                   Back
                 </Button>
@@ -114,7 +110,6 @@ const Agent = () => {
                   variant="contained"
                   endIcon={<NavigateNextOutlined />}
                   type="submit"
-                  disabled={!isValid}
                 >
                   Next
                 </Button>

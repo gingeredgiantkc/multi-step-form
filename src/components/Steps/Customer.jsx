@@ -1,5 +1,6 @@
 import React from "react";
 import * as Yup from "yup";
+import FtrSvg from "../../frontier.svg";
 import { Form, Formik } from "formik";
 import FormikControl from "../FormikControl/FormikControl";
 import { Button, Stack, ThemeProvider, createTheme } from "@mui/material";
@@ -11,7 +12,6 @@ const Customer = () => {
     values,
     handleNextStep,
     handlePrevStep,
-    stepNumber,
    } = useFormContext();
 
   const handleSubmit = (values) => {
@@ -51,10 +51,10 @@ const Customer = () => {
       })}
       onSubmit={handleSubmit}
     >
-      {({values, isValid}) => (
+      {({values}) => (
         <Form>
           <div className="grid grid-cols-12 grid-rows-6 gap-0">
-            <div className="col-span-8 col-start-3 text-center">
+            <div className="col-span-full text-center my-auto">
               <h1 className="text-gray-700 pt-4 pb-0 font-bold text-2xl">Customer Information</h1>
             </div>
             <div className="row-start-2 col-span-5 col-start-2">
@@ -73,6 +73,9 @@ const Customer = () => {
                 label="Customer BTN"
                 type="text"
               />
+            </div>
+            <div className="row-start-3 col-start-8 col-span-4 row-span-3 place-content-center">
+              <img src={FtrSvg} alt="Frontier Icon" />
             </div>
             <div className="row-start-4 col-span-3 col-start-2">
               <FormikControl
@@ -98,14 +101,13 @@ const Customer = () => {
                 ]}
               />
             </div>
-            <div className="row-start-6 col-span-12 place-self-center">
+            <div className="row-start-6 col-span-full place-self-center mt-auto">
               <ThemeProvider theme={theme}>
                 <Stack direction="row" spacing={2}>
                   <Button
                     color="secondary"
                     variant="contained"
                     startIcon={<NavigateBeforeOutlined />}
-                    disabled={stepNumber <= 1}
                     type="button"
                     onClick={() => handlePrevStep(values)}
                   >
@@ -115,9 +117,7 @@ const Customer = () => {
                     color="primary"
                     variant="contained"
                     endIcon={<NavigateNextOutlined />}
-                    type="button"
-                    onClick={() => handleNextStep(values)}
-                    disabled={!isValid}
+                    type="submit"
                   >
                     Next
                   </Button>
