@@ -1,7 +1,8 @@
 import React from 'react'
 import { Backdrop, Box, Button, createTheme, Fade, Modal, Stack, ThemeProvider } from '@mui/material';
 import { NavigateBeforeOutlined } from "@mui/icons-material";
-import useFormContext from '../hooks/useFormContext'
+import useFormContext from '../hooks/useFormContext';
+import dotenv from 'dotenv';
 
 export default function Agreement() {
   const theme = createTheme({
@@ -50,7 +51,7 @@ export default function Agreement() {
       }])
     };
 
-    fetch("https://v1.nocodeapi.com/gingeredgiantkc/google_sheets/DcJmXdwHVwrQUHML/addRows?tabId=Sheet1", requestOptions)
+    fetch(process.env.API_URL, requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error)); 
