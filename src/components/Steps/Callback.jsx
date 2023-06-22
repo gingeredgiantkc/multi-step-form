@@ -39,8 +39,8 @@ const Callback = () => {
     <Formik
       initialValues={values}
       validationSchema={Yup.object().shape({
-        date: Yup.string().required('Required'),
-        time: Yup.string().required('Required'),
+        date: Yup.string(),
+        time: Yup.string(),
       })}
       onSubmit={handleSubmit}
     >
