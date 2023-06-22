@@ -66,7 +66,7 @@ const Order = () => {
                 onChange={handleNewData}
               />
             </div>
-            <div className="col-span-8 col-start-4">
+            <div className="col-span-6 col-start-4">
               <FormikControl
                 control="input"
                 label="Data"
@@ -84,7 +84,7 @@ const Order = () => {
                 onChange={handleNewVoice}
               />
             </div>
-            <div className="col-span-8 col-start-4">
+            <div className="col-span-6 col-start-4">
               <FormikControl
                 control="input"
                 label="Voice"
@@ -102,7 +102,7 @@ const Order = () => {
                 onChange={handleNewVideo}
               />
             </div>
-            <div className="col-span-8 col-start-4">
+            <div className="col-span-6 col-start-4">
               <FormikControl
                 control="input"
                 label="Video"
