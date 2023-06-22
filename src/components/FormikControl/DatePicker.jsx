@@ -17,7 +17,6 @@ const Dates = ({ name, ...rest }) => {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
         {...rest}
-        name={name}
         onChange={handleChange}
         slotProps={{ textField: { variant: 'filled' } }}
       />
