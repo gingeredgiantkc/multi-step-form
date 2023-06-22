@@ -12,7 +12,6 @@ const Dates = (props) => {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
         disablePast
-        value={dayjs()}
         slotProps={{ textField: { variant: 'filled' } }}
         {...props}
       />

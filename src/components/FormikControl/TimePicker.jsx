@@ -11,7 +11,6 @@ const Times = (props) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <TimePicker
-        value={dayjs()}
         minTime={dayjs().set('hour', 7).startOf('hour')}
         maxTime={dayjs().set('hour', 19).startOf('hour')}
         slotProps={{ textField: { variant: 'filled' } }}
