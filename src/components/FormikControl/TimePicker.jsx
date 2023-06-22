@@ -29,7 +29,7 @@ const TimePickers = ({ label, ...props }) => {
   return (
     <React.Fragment>
       <FormLabel>{label}</FormLabel>
-      <Field as={Times} {...field} {...rest} />
+      <Field as={Times} {...field} {...props} />
       <div className={`text-sm mb-1 ${meta.touched && meta.error ? "text-torch-red" : "opacity-0"}`}>
         <ErrorOutlineIcon fontSize="small" color="error" /> {meta.error}
       </div>
