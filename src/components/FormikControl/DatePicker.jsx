@@ -6,13 +6,14 @@ import PropTypes from "prop-types";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
-const Dates = (props) => {
+const Dates = ({ name, onChange, ...props }) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
-        disablePast
-        slotProps={{ textField: { variant: 'filled' } }}
         {...props}
+        disablePast
+        onChange={onChange}
+        slotProps={{ textField: { variant: 'filled' } }}
       />
     </LocalizationProvider>
   );

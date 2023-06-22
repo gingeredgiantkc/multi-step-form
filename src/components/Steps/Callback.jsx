@@ -11,6 +11,8 @@ const Callback = () => {
     values,
     handleNextStep,
     handlePrevStep,
+    handleDateChange,
+    handleTimeChange
   } = useFormContext();
 
   const theme = createTheme({
@@ -55,6 +57,7 @@ const Callback = () => {
                 control="date"
                 label="Follow-Up Date"
                 name="date"
+                onChange={handleDateChange}
               />
             </div>
             <div className="row-start-3 col-start-5 col-span-4">
@@ -62,6 +65,7 @@ const Callback = () => {
                 control="time"
                 label="Follow-Up Time"
                 name="time"
+                onChange={handleTimeChange}
               />
             </div>
             <div className="row-start-4 col-span-full place-self-center mt-auto">

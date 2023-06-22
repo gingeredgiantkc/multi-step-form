@@ -5,16 +5,15 @@ import PropTypes from "prop-types";
 import { TimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import dayjs from "dayjs";
 
-const Times = (props) => {
+const Times = ({ name, onChange, ...props }) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <TimePicker
-        minTime={dayjs().set('hour', 7).startOf('hour')}
-        maxTime={dayjs().set('hour', 19).startOf('hour')}
-        slotProps={{ textField: { variant: 'filled' } }}
         {...props}
+        name={name}
+        onChange={onChange}
+        slotProps={{ textField: { variant: 'filled' } }}
       />
     </LocalizationProvider>
   );

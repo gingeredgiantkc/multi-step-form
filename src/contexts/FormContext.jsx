@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import dayjs from 'dayjs';
 
 const FormContext = createContext({})
 
@@ -53,6 +54,16 @@ export const FormProvider = ({ children }) => {
     setOpen(false);
   };
 
+  const handleDateChange = (newDate) => {
+    const cbDate = dayjs(newDate).toJSON().slice(0, 10)
+    setValues((prev) => ({ ...prev, cbDate }));
+  };
+
+  const handleTimeChange = (newTime) => {
+    const cbTime = dayjs(newTime).toJSON().slice(11, -5)
+    setValues((prev) => ({ ...prev, cbTime }));
+  };
+
   const handleNewData = () => setData(!data)
   const handleNewVoice = () => setVoice(!voice)
   const handleNewVideo = () => setVideo(!video)
@@ -77,6 +88,8 @@ export const FormProvider = ({ children }) => {
         handleNextStep,
         handleOpen,
         handleClose,
+        handleDateChange,
+        handleTimeChange,
         handleNewData,
         handleNewVoice,
         handleNewVideo,
