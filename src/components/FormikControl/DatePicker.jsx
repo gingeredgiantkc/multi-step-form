@@ -1,18 +1,25 @@
 import React from "react";
-import { Field, useField } from "formik";
+import { Field, useFormikContext, useField } from "formik";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { FormLabel } from "@mui/material";
+import { TextField, FormLabel } from "@mui/material";
 import PropTypes from "prop-types";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
 
-const Dates = ({ name, onChange, ...props }) => {
+const Dates = ({ name, ...rest }) => {
+  const { setFieldValue } = useFormikContext();
+  const handleChange = (newDate) => {
+    let cbDate = dayjs(newDate).toJSON().slice(0, 10);
+    setFieldValue(name, cbDate);
+  };
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
-        {...props}
+        {...rest}
+        name={name}
         disablePast
-        onChange={onChange}
+        onChange={handleChange}
         slotProps={{ textField: { variant: 'filled' } }}
       />
     </LocalizationProvider>
@@ -23,12 +30,13 @@ Dates.propTypes = {
   name: PropTypes.string,
 };
 
-const DatePickers = ({ label, ...props }) => {
+const DatePickers = (props) => {
+  const { label, ...rest } = props;
   const [field, meta] = useField(props);
   return (
     <React.Fragment>
       <FormLabel>{label}</FormLabel>
-      <Field as={Dates} {...field} {...props} />
+      <Field as={Dates} {...field} {...rest} />
       <div className={`text-sm mb-1 ${meta.touched && meta.error ? "text-torch-red" : "opacity-0"}`}>
         <ErrorOutlineIcon fontSize="small" color="error" /> {meta.error}
       </div>
