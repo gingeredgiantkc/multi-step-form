@@ -1,7 +1,7 @@
 import React from "react";
 import { Field, useFormikContext, useField } from "formik";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { TextField, FormLabel } from "@mui/material";
+import { FormLabel } from "@mui/material";
 import PropTypes from "prop-types";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -18,7 +18,6 @@ const Dates = ({ name, ...rest }) => {
       <DatePicker
         {...rest}
         name={name}
-        disablePast
         onChange={handleChange}
         slotProps={{ textField: { variant: 'filled' } }}
       />
