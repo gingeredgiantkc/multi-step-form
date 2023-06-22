@@ -7,19 +7,14 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 
-const Dates = ({ name, ...rest }) => {
-  const { setFieldValue } = useFormikContext();
-  const handleChange = (newDate) => {
-    let cbDate = dayjs(newDate).toJSON().slice(0, 10);
-    setFieldValue(name, cbDate);
-  };
+const Dates = (props) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
-        {...rest}
         disablePast
-        onChange={handleChange}
-        renderInput={(params) => <TextField {...params} />}
+        value={dayjs()}
+        slotProps={{ textField: { variant: 'filled' } }}
+        {...props}
       />
     </LocalizationProvider>
   );
@@ -29,13 +24,12 @@ Dates.propTypes = {
   name: PropTypes.string,
 };
 
-const DatePickers = (props) => {
-  const { label, ...rest } = props;
+const DatePickers = ({ label, ...props }) => {
   const [field, meta] = useField(props);
   return (
     <React.Fragment>
       <FormLabel>{label}</FormLabel>
-      <Field as={Dates} {...field} {...rest} />
+      <Field as={Dates} {...field} {...props} />
       <div className={`text-sm mb-1 ${meta.touched && meta.error ? "text-torch-red" : "opacity-0"}`}>
         <ErrorOutlineIcon fontSize="small" color="error" /> {meta.error}
       </div>

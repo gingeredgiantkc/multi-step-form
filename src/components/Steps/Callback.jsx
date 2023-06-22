@@ -11,7 +11,6 @@ const Callback = () => {
     values,
     handleNextStep,
     handlePrevStep,
-    stepNumber,
   } = useFormContext();
 
   const theme = createTheme({
@@ -72,7 +71,6 @@ const Callback = () => {
                     color="secondary"
                     variant="contained"
                     startIcon={<NavigateBeforeOutlined />}
-                    disabled={stepNumber <= 1}
                     type="button"
                     onClick={() => handlePrevStep(values)}
                   >

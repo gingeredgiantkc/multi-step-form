@@ -1,24 +1,21 @@
 import React from "react";
-import { Field, useFormikContext, useField } from "formik";
-import { TextField, FormLabel } from "@mui/material";
+import { Field, useField } from "formik";
+import { FormLabel } from "@mui/material";
 import PropTypes from "prop-types";
 import { TimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import dayjs from "dayjs";
 
-const Times = ({ name, ...rest }) => {
-  const { setFieldValue } = useFormikContext();
-  const handleChange = (newTime) => {
-    let cbTime = dayjs(newTime).toJSON().slice(11, -5);
-    setFieldValue(name, cbTime);
-  }
+const Times = (props) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <TimePicker
-        {...rest}
-        onChange={handleChange}
-        renderInput={(params) => <TextField {...params} />}
+        value={dayjs()}
+        minTime={dayjs().set('hour', 7).startOf('hour')}
+        maxTime={dayjs().set('hour', 19).startOf('hour')}
+        slotProps={{ textField: { variant: 'filled' } }}
+        {...props}
       />
     </LocalizationProvider>
   );
@@ -28,8 +25,7 @@ Times.propTypes = {
   name: PropTypes.string,
 };
 
-const TimePickers = (props) => {
-  const { label, ...rest } = props;
+const TimePickers = ({ label, ...props }) => {
   const [field, meta] = useField(props);
   return (
     <React.Fragment>
