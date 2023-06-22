@@ -101,8 +101,7 @@ export default function Agreement() {
           </div>
           <ThemeProvider theme={theme}>
             <Stack direction="row" spacing={2}>
-              <div className='grid grid-cols-12 grid-row-1 gap-4 pt-4'>
-                <div className='col-end-5'>
+              <div className='grid grid-cols-1 grid-row-1 gap-2 mt-auto place-self-center'>
                   <Button
                     color="secondary"
                     variant="contained"
@@ -112,8 +111,6 @@ export default function Agreement() {
                   >
                     Back
                   </Button>
-                </div>
-                <div className='col-start-8'>
                   <Button
                     color="primary"
                     variant="contained"
@@ -122,7 +119,6 @@ export default function Agreement() {
                   >
                     Submit
                   </Button>
-                </div>
               </div>
             </Stack>
           </ThemeProvider>
