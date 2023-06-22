@@ -89,7 +89,15 @@ export default function Agreement() {
             Agree & Submit
           </div>
           <div className='text-justify text-sm font-normal text-gray-700'>
-            By clicking 'Submit,' I, the Agent, acknowledge and agree that the changes specified in this request have been made available to me in my normal systems, and due to a system-returned error not of my own doing, I have exhausted all other resources to create this order successfully. Upon receiving verbal or written notification of the order's creation, I shall complete said order by entering its work schedule and staging it accordingly. I also understand and agree that I, and I alone, am responsible for the creation of this order as well as completing the follow-up with the customer by its scheduled time.
+            By clicking Submit, I, the Agent, acknowledge and agree that the 
+            changes specified in this request have been made available to me in 
+            my normal systems, and due to a system-returned error not of my own doing, 
+            I have exhausted all other resources to create this order successfully. 
+            Upon receiving verbal or written notification of the order's creation, 
+            I shall complete said order by entering its work schedule and staging it accordingly. 
+            I also understand and agree that I, and I alone, am responsible for the 
+            creation of this order as well as completing the follow-up with the customer 
+            by its scheduled time.
           </div>
           <ThemeProvider theme={theme}>
             <Stack direction="row" spacing={2}>
