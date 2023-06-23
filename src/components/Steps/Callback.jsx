@@ -9,8 +9,12 @@ import useFormContext from "../../hooks/useFormContext";
 const Callback = () => {
   const {
     values,
+    selectedDate,
+    selectedTime,
     handleNextStep,
     handlePrevStep,
+    handleDateChange,
+    handleTimeChange
   } = useFormContext();
 
   const theme = createTheme({
@@ -39,8 +43,8 @@ const Callback = () => {
     <Formik
       initialValues={values}
       validationSchema={Yup.object().shape({
-        date: Yup.string().required('Required'),
-        time: Yup.string().required('Required'),
+        date: Yup.date().required('Required').nullable(),
+        time: Yup.date().required('Required').nullable(),
       })}
       onSubmit={handleSubmit}
     >
@@ -61,7 +65,7 @@ const Callback = () => {
               <FormikControl
                 control="time"
                 label="Follow-Up Time"
-                name="time"
+                name="dateTime"
               />
             </div>
             <div className="row-start-4 col-span-full place-self-center mt-auto">

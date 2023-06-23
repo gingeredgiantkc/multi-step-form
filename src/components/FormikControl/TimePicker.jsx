@@ -1,49 +1,47 @@
 import React from "react";
-import { Field, useFormikContext, useField } from "formik";
-import { FormLabel } from "@mui/material";
-import PropTypes from "prop-types";
-import { TimePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { Field, useField } from "formik";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import dayjs from "dayjs";
+import DatePicker from 'react-datepicker';
+import { setHours, setMinutes, subDays } from "date-fns";
 
-const Times = ({ name, ...rest }) => {
-  const { setFieldValue } = useFormikContext();
-  const handleChange = (newTime) => {
-    let cbTime = dayjs(newTime).toJSON().slice(11, -5);
-    setFieldValue(name, cbTime);
-  }
-  return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <TimePicker
-        {...rest}
-        onChange={handleChange}
-        slotProps={{ textField: { variant: 'filled' } }}
-      />
-    </LocalizationProvider>
-  );
-};
-
-Times.propTypes = {
-  name: PropTypes.string,
-};
-
-const TimePickers = (props) => {
-  const { label, ...rest } = props;
-  const [field, meta] = useField(props);
+const TimePicker = (props) => {
+  const { label, name, ...rest } = props
+  const [meta] = useField(name)
   return (
     <React.Fragment>
-      <FormLabel>{label}</FormLabel>
-      <Field as={Times} {...field} {...rest} />
-      <div className={`text-sm mb-1 ${meta.touched && meta.error ? "text-torch-red" : "opacity-0"}`}>
+      <label
+        htmlFor={name}
+        className="block text-gray-700 text-md font-bold pb-0.5"
+      >
+        {label}
+      </label>
+      <Field name={name}>
+        {({ form, field }) => {
+          const { setFieldValue } = form
+          const { value } = field
+          return (
+            <DatePicker
+              id={name} 
+              {...field} 
+              {...rest} 
+              selected={value} 
+              onChange={val => setFieldValue(name, val)}
+              showTimeSelect
+              showTimeSelectOnly
+              inline
+              timeIntervals={15}
+              minTime={setHours(setMinutes(new Date(), 0), 7)}
+              maxTime={setHours(setMinutes(new Date(), 45), 18)}
+              dateFormat="h:mm aa"
+            />
+          )
+        }}
+      </Field>
+      <div className={`text-sm mb-1 ${meta && meta.touched && meta.error ? "text-torch-red" : "opacity-0"}`}>
         <ErrorOutlineIcon fontSize="small" color="error" /> {meta.error}
       </div>
     </React.Fragment>
-  );
-};
+  )
+}
 
-TimePickers.propTypes = {
-  label: PropTypes.string,
-};
-
-export default TimePickers;
+export default TimePicker

@@ -3,12 +3,11 @@ import { NavigateBeforeOutlined, NavigateNextOutlined } from "@mui/icons-materia
 import { Formik, Form } from "formik";
 import React from 'react';
 import useFormContext from '../../hooks/useFormContext';
-import Agreement from "../Agreement";
 
 const Confirm = () => {
   const {
-    handleOpen,
     values,
+    handleOpen,
     handlePrevStep
   } = useFormContext();
   const theme = createTheme({
@@ -159,7 +158,7 @@ const Confirm = () => {
                 <ListItem disableGutters>
                   <ListItemText
                     primary="Follow-Up Date"
-                    secondary={values.date}
+                    secondary={values.time}
                   />
                 </ListItem>
               </List>

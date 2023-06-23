@@ -1,6 +1,4 @@
 import { createContext, useState } from "react";
-import dayjs from 'dayjs';
-
 const FormContext = createContext({})
 
 export const FormProvider = ({ children }) => {
@@ -30,8 +28,8 @@ export const FormProvider = ({ children }) => {
     data: '',
     video: '',
     voice: '',
-    date: '',
-    time: '',
+    date: null,
+    time: null,
   })
 
   const handleNextStep = (newValues) => {

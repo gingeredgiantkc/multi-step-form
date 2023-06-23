@@ -45,8 +45,8 @@ export default function Agreement() {
         Data: values.data,
         Voice: values.voice,
         Video: values.video,
-        CB_Date: values.date,
-        CB_Time: values.time,
+        CB_Date: dayjs(values.date).toJSON().slice(0, 10),
+        CB_Time: dayjs(values.time).toJSON().slice(11, -5),
       }])
     };
 

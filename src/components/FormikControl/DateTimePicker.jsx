@@ -1,36 +1,47 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { useField, Field } from "formik";
+import { Field, useField } from "formik";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import DatePicker from 'react-datepicker';
+import { setHours, setMinutes, subDays } from "date-fns";
 
-const DateTimePickers = ({ label, ...props }) => {
-  const [field, meta] = useField(props);
+const DateTimePicker = (props) => {
+  const { label, name, ...rest } = props
+  const [meta] = useField(name)
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <React.Fragment>
       <label
-        htmlFor={props.id || props.name}
-        className="block text-gray-700 text-md font-bold mb-1"
+        htmlFor={name}
+        className="block text-gray-700 text-md font-bold pb-0.5"
       >
         {label}
       </label>
-      <Field 
-        as={DateTimePicker}
-        name={props.name}
-        textField={{ helperText: 'Select date/time of Customer Follow-Up' }}
-        {...field}
-        {...props}
-      /> 
-      <div className={`text-sm mb-1 ${meta.touched && meta.error ? "text-torch-red" : "opacity-0"}`}>
+      <Field name={name}>
+        {({ form, field }) => {
+          const { setFieldValue } = form
+          const { value } = field
+          return (
+            <DatePicker
+              id={name} 
+              {...field} 
+              {...rest} 
+              selected={value} 
+              onChange={val => setFieldValue(name, val)}
+              showTimeSelect
+              inline
+              minDate={subDays(new Date(), 0)}
+              timeIntervals={15}
+              minTime={setHours(setMinutes(new Date(), 0), 7)}
+              maxTime={setHours(setMinutes(new Date(), 45), 18)}
+              dateFormat="MM/dd/yyyy h:mm aa"
+            />
+          )
+        }}
+      </Field>
+      <div className={`text-sm mb-1 ${meta && meta.touched && meta.error ? "text-torch-red" : "opacity-0"}`}>
         <ErrorOutlineIcon fontSize="small" color="error" /> {meta.error}
       </div>
-    </LocalizationProvider>
-  );
-};
+    </React.Fragment>
+  )
+}
 
-DateTimePickers.propTypes = {
-  label: PropTypes.string,
-};
-
-export default DateTimePickers;
+export default DateTimePicker

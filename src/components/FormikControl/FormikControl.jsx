@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import DatePickers from "./DatePicker";
 import FormRadio from "./FormRadio";
 import FormCheckBox from "./FormCheckBox";
-import DateTimePickers from "./DateTimePicker";
+import DateTimePicker from "./DateTimePicker";
 import TimePickers from "./TimePicker";
 
 const FormikControl = ({ control, ...props }) => {
@@ -19,7 +19,7 @@ const FormikControl = ({ control, ...props }) => {
     case "radio":
       return <FormRadio {...props} />;
     case "dateTime":
-      return <DateTimePickers {...props} />;
+      return <DateTimePicker {...props} />;
     case "date":
       return <DatePickers {...props} />;
     case "checkbox":

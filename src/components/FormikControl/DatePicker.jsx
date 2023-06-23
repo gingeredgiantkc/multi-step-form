@@ -1,49 +1,43 @@
 import React from "react";
-import { Field, useFormikContext, useField } from "formik";
+import { Field } from "formik";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { FormLabel } from "@mui/material";
-import PropTypes from "prop-types";
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import dayjs from "dayjs";
+import DateView from 'react-datepicker';
+import { subDays } from "date-fns";
 
-const Dates = ({ name, ...rest }) => {
-  const { setFieldValue } = useFormikContext();
-  const handleChange = (newDate) => {
-    let cbDate = dayjs(newDate).toJSON().slice(0, 10);
-    setFieldValue(name, cbDate);
-  };
-  return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DatePicker
-        {...rest}
-        onChange={handleChange}
-        slotProps={{ textField: { variant: 'filled' } }}
-      />
-    </LocalizationProvider>
-  );
-};
-
-Dates.propTypes = {
-  name: PropTypes.string,
-};
-
-const DatePickers = (props) => {
-  const { label, ...rest } = props;
-  const [field, meta] = useField(props);
+const DatePicker = (props) => {
+  const { label, name, ...rest } = props
+  const [meta] = useField(name)
   return (
     <React.Fragment>
-      <FormLabel>{label}</FormLabel>
-      <Field as={Dates} {...field} {...rest} />
-      <div className={`text-sm mb-1 ${meta.touched && meta.error ? "text-torch-red" : "opacity-0"}`}>
+      <label
+        htmlFor={name}
+        className="block text-gray-700 text-md font-bold pb-0.5"
+      >
+        {label}
+      </label>
+      <Field name={name}>
+        {({ form, field }) => {
+          const { setFieldValue } = form
+          const { value } = field
+          return (
+            <DateView
+              id={name} 
+              {...field} 
+              {...rest} 
+              selected={value} 
+              onChange={val => setFieldValue(name, val)}
+              inline
+              minDate={subDays(new Date(), 0)}
+              dateFormat="MM/dd/yyyy"
+            />
+          )
+        }}
+      </Field>
+      <div className={`text-sm mb-1 ${meta && meta.touched && meta.error ? "text-torch-red" : "opacity-0"}`}>
         <ErrorOutlineIcon fontSize="small" color="error" /> {meta.error}
       </div>
     </React.Fragment>
-  );
-};
+  )
+}
 
-DatePickers.propTypes = {
-  label: PropTypes.string,
-};
-
-export default DatePickers;
+export default DatePicker
